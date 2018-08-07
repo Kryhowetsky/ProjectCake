@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ProjectCake.Models.ProductViewModel>
+@using ProjectCake.Models
+@using ProjectCake.Code
+
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Cakes</div>
+    <div class="panel-body">
+        <div class="btn-group">
+            <a id="createEditBookModal" data-toggle="modal" asp-action="AddEditProduct" data-target="#modal-action-product" class="btn btn-primary">
+                <i class="glyphicon glyphicon-plus"></i>  Add Product
+            </a>
+        </div>
+        <div class="top-buffer"></div>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>CategoryId</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CategoryId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td>
+                            <a id="editProductModal" data-toggle="modal" asp-action="AddEditProduct" asp-route-id="@item.Id" data-target="#modal-action-product"
+                               class="btn btn-info">
+                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                            </a>
+                            <a id="deleteProductModal" data-toggle="modal" asp-action="DeleteProduct" asp-route-id="@item.Id" data-target="#modal-action-product" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            </a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-product", AreaLabeledId = "modal-action-product-label", Size = ModalSize.Medium })
+@section scripts
+    {
+    <script src="~/js/product-index.js" asp-append-version="true"></script>
+}       

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
+using ProjectCake.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProjectCake.Maps;
 using ProjectCake.Models;
+using System.IO;
 
 namespace ProjectCake.Data
 {
@@ -20,6 +19,9 @@ namespace ProjectCake.Data
         {
             base.OnModelCreating(builder);
             new OrderCakeMap(builder.Entity<OrderCake>());
+            new ProductMap(builder.Entity<Product>());
+            new CategoryMap(builder.Entity<Category>());
+            new FileMap(builder.Entity<File>());
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);

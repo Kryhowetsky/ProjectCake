@@ -1,0 +1,31 @@
+﻿@model List<OrderCakeViewModel>
+
+<div class="panel-body">
+    <h3 class="text-center">This is order list</h3>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Comment</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var orderCake in Model)
+            {
+                <tr>
+                    <td>@orderCake.Name</td>
+                    <td>@orderCake.Surname</td>
+                    <td>@orderCake.Phone</td>
+                    <td>@orderCake.Email</td>
+                    <td>@orderCake.Comment</td>
+                    <td>@orderCake.Date</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

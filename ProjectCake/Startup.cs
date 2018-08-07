@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectCake.Data;
 using ProjectCake.Models;
 using ProjectCake.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace ProjectCake
 {
@@ -73,7 +71,6 @@ namespace ProjectCake
         {
             using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-
                 var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
                 Task<IdentityResult> roleResult;

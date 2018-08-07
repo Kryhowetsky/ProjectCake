@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using ProjectCake.Models;
 using ProjectCake.Models.ManageViewModels;
 using ProjectCake.Services;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace ProjectCake.Controllers
 {
@@ -241,7 +239,7 @@ namespace ProjectCake.Controllers
                 .ToList();
             model.ShowRemoveButton = await _userManager.HasPasswordAsync(user) || model.CurrentLogins.Count > 1;
             model.StatusMessage = StatusMessage;
-           
+
             return View(model);
         }
 
@@ -251,7 +249,7 @@ namespace ProjectCake.Controllers
         {
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-            
+
             // Request a redirect to the external login provider to link a login for the current user
             var redirectUrl = Url.Action(nameof(LinkLoginCallback));
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, _userManager.GetUserId(User));
@@ -540,6 +538,6 @@ namespace ProjectCake.Controllers
             model.AuthenticatorUri = GenerateQrCodeUri(user.Email, unformattedKey);
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

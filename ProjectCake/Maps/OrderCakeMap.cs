@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProjectCake.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjectCake.Maps
 {
@@ -13,6 +9,5 @@ namespace ProjectCake.Maps
         {
             entityBuilder.HasKey(t => t.Id);
         }
-        
     }
 }

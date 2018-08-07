@@ -1,5 +1,3 @@
-using System;
-
 namespace ProjectCake.Models
 {
     public class ErrorViewModel

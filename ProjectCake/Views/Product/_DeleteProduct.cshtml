@@ -1,0 +1,12 @@
+﻿@model String
+@using ProjectCake.Models
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("_ModalHeader", new ModalHeader { Heading = "Delete Product" })
+
+    <div class="modal-body form-horizontal">
+        Do you really want to delete <b>@Model</b>?
+    </div>
+    @Html.Partial("_ModalFooter", new ModalFooter { SubmitButtonText = "Delete" })
+}

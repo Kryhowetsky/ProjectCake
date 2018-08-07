@@ -1,0 +1,70 @@
+﻿@model ProjectCake.Models.OrderCakeViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-3 ">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-head ">
+                    <h3 class="text-center">Зробити онлайн замовлення</h3>
+                </div>
+                <div class="panel-body">
+                    <form asp-action="OrderCake" id="order-cake-form" enctype="multipart/form-data" method="post" name="OrderCake">
+
+                        <div class="row form-group">
+                            <label asp-for="Name" for="Name" class="col-lg-11 col-form-label">Ваше Ім'я</label>
+                            <div class="col-lg-11">
+                                <input asp-for="Name" type="text" class="form-control" placeholder="Введіть Ваше Ім'я" id="Name" required name="Name" minlength="3">
+                                <div id="name_error" style="display: none; color: red; font-weight: bold;">Введіть Ваше Ім'я</div>
+                            </div>
+
+                            <div class="top-buffer"></div>
+                            <label asp-for="Surname" for="Surname" class="col-lg-11 col-form-label">Ваше Прізвище</label>
+                            <div class="col-lg-11">
+                                <input asp-for="Surname" type="text" class="form-control" placeholder="Введіть Ваше Прізвище" id="Surname" name="Surname" required>
+                                <div id="surname_error" style="display: none; color: red; font-weight: bold;">Введіть Ваше Прізвище</div>
+                            </div>
+                        </div>
+                        <div class="top-buffer"></div>
+                        <div class="form-group row ">
+                            <label asp-for="Phone" for="phone" class="col-lg-11 col-form-label">Номер Телефону</label>
+                            <div class="col-lg-11">
+                                <input asp-for="Phone" class="form-control" type="tel" placeholder="+380" id="phone" name="Phone" required>
+                                <div id="phone_error" style="display: none; color: red; font-weight: bold;">Введіть номер телефону</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Email" for="email" class="col-lg-11 col-form-label">Email</label>
+                            <div class="col-lg-11">
+                                <input asp-for="Email" class="form-control" type="email" placeholder="example@example.com" id="email" name="Email" required>
+                                <div id="email_error" style="display: none; color: red; font-weight: bold;">Введіть емейл</div>
+                            </div>
+                        </div>
+                        <div class="custom-file">
+                            <label class="custom-file-label" for="CustomFile1">Виберіть Файл...</label>
+                            <input type="file" class="custom-file-input" id="CustomFile1" name="File">
+                        </div>
+                        <div class="top-buffer"></div>
+                        <div class="form-group">
+                            <label asp-for="Comment" for="comment">Ваш коментарій:</label>
+                            <textarea asp-for="Comment" class="form-control" rows="5" id="comment"></textarea>
+                        </div>
+                        <div class="top-buffer"></div>
+                        <div class="col-auto my-1">
+                            <button type="button" class="btn btn-success" id="order-cake-submit">
+                                <span class="glyphicon glyphicon-ok-sign"> Відправити</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_SuccsessModal" />
+
+@section Scripts {
+    
+    <script type="text/javascript" src="~/js/order-cake.js"></script>
+
+}

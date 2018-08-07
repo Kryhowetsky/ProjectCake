@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ProjectCake.Models.ManageViewModels
+﻿namespace ProjectCake.Models.ManageViewModels
 {
     public class TwoFactorAuthenticationViewModel
     {

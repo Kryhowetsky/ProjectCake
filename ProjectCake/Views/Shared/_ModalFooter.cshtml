@@ -1,0 +1,11 @@
+﻿@model ProjectCake.Models.ModalFooter
+
+<div class="modal-footer">
+    <button data-dismiss="modal" id="@Model.CancelButtonID" class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove">@Model.CancelButtonText</span></button>
+    @if (!Model.OnlyCancelButton)
+    {
+        <button class="btn btn-success" id="@Model.SubmitButtonID" type="submit">
+            <span class="glyphicon glyphicon-ok"> @Model.SubmitButtonText</span>
+        </button>
+    }
+</div>
