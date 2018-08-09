@@ -36,8 +36,13 @@ namespace ProjectCake.Controllers
                 Description = p.Description,
                 Price = p.Price,
                 Date = p.Date,
-                CategoryId = p.CategoryId
+                CategoryId = p.CategoryId,
+                ImageProd = p.ImageProd ?? Consts.DefaultImageProd
+
+
             });
+
+
 
             return View("Index", model);
         }
@@ -77,7 +82,7 @@ namespace ProjectCake.Controllers
                     model.Price = product.Price;
                     model.Date = product.Date;
                     model.CategoryId = product.CategoryId;
-                    //model.ImageProd = product.ImageProd;
+                    model.ImageProd = product.ImageProd;
 
                 }
             }
@@ -95,15 +100,10 @@ namespace ProjectCake.Controllers
         [HttpPost]
         public IActionResult AddEditProduct(long? id, ProductViewModel model)
         {
-
-
-
             try
             {
                 if (ModelState.IsValid)
                 {
-
-
                     bool isNew = !id.HasValue;
                     Product product = isNew ? new Product
                     {
@@ -152,7 +152,7 @@ namespace ProjectCake.Controllers
                 throw ex;
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("AdminIndex");
         }
 
         [Authorize(Roles = "Admin")]
@@ -171,7 +171,7 @@ namespace ProjectCake.Controllers
             Product product = _context.Set<Product>().SingleOrDefault(c => c.Id == id);
             _context.Entry(product).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AdminIndex");
         }
     }
 }

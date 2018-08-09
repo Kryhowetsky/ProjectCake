@@ -36,10 +36,12 @@
                         <img src="@item.ImageProd" alt="Image"  style="width: 200px;"/>
                         </td>
                         <td>
+                           
                             <a id="editProductModal" data-toggle="modal" asp-action="AddEditProduct" asp-route-id="@item.Id" data-target="#modal-action-product"
                                class="btn btn-info">
                                 <i class="glyphicon glyphicon-pencil"></i>  Edit
                             </a>
+                            <div style="margin-top: 20px;"></div>
                             <a id="deleteProductModal" data-toggle="modal" asp-action="DeleteProduct" asp-route-id="@item.Id" data-target="#modal-action-product" class="btn btn-danger">
                                 <i class="glyphicon glyphicon-trash"></i>  Delete
                             </a>
