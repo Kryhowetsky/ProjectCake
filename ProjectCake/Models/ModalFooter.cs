@@ -1,6 +1,4 @@
-﻿
-
-namespace ProjectCake.Models
+﻿namespace ProjectCake.Models
 {
     public class ModalFooter
     {

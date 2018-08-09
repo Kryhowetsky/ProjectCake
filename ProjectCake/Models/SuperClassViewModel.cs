@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-
 namespace ProjectCake.Models
 {
     public class SuperClassViewModel

@@ -1,10 +1,7 @@
-﻿
-using ProjectCake.Data;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProjectCake.Maps;
 using ProjectCake.Models;
-using System.IO;
 
 namespace ProjectCake.Data
 {

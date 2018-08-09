@@ -20,6 +20,17 @@
 
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="wwwroot\images\UploadImg\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\chocolate.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Product\AdminIndex.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>

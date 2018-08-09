@@ -1,6 +1,4 @@
-﻿
-
-namespace ProjectCake.Code
+﻿namespace ProjectCake.Code
 {
     public enum ModalSize
     {
@@ -9,4 +7,3 @@ namespace ProjectCake.Code
         Medium
     }
 }
-

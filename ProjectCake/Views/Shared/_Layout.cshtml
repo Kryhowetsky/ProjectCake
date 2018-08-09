@@ -33,10 +33,15 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Product" asp-action="Index">Add Cake</a></li>
-                    <li><a asp-area="" asp-controller="Category" asp-action="Index">Category</a></li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-area="" asp-controller="Product" asp-action="AdminIndex">Add Cake</a></li>
+                        <li><a asp-area="" asp-controller="Category" asp-action="Index">Category</a></li>
+                        <li><a asp-area="" asp-controller="OrderCake" asp-action="Index">List of orders</a></li>
+                    }
+                    <li><a asp-area="" asp-controller="Product" asp-action="Index">Cakes</a></li>
                     <li><a asp-area="" asp-controller="OrderCake" asp-action="OrderCake">Order Cake</a></li>
-                    <li><a asp-area="" asp-controller="OrderCake" asp-action="Index">List of orders</a></li>
                     <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")

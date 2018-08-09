@@ -52,6 +52,7 @@ namespace ProjectCake
             }
 
             app.UseStaticFiles();
+            
 
             app.UseAuthentication();
 

@@ -1,6 +1,4 @@
-﻿
-
-using ProjectCake.Code;
+﻿using ProjectCake.Code;
 
 namespace ProjectCake.Models
 {

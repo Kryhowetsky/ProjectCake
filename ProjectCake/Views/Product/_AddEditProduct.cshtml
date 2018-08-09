@@ -1,7 +1,7 @@
 ﻿@model ProjectCake.Models.ProductViewModel
 @using ProjectCake.Models
 
-<form asp-action="AddEditProduct" role="form">
+<form asp-action="AddEditProduct" role="form" enctype="multipart/form-data">
     @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = String.Format("{0} Product", @Model.Id == 0 ? "Add" : "Edit") })
     <div class="modal-body form-horizontal">
         <div class="form-group">
@@ -13,13 +13,22 @@
         <div class="form-group">
             <label asp-for="Description" class="col-lg-3 col-sm-3 control-label"></label>
             <div class="col-lg-6">
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" class="form-control" rows="10" cols="70" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Price" class="col-lg-3 col-sm-3 control-label"></label>
             <div class="col-lg-6">
                 <input asp-for="Price" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="File" class="col-lg-3 col-sm-3 control-label"></label>
+            <div class="col-lg-6">
+                @*  <input asp-for="File" type="file" class="form-control" />*@
+                @*<input type="file" class="custom-file-input" id="File" name="File">*@
+                <input asp-for="File" />
             </div>
         </div>
 
