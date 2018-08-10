@@ -173,5 +173,21 @@ namespace ProjectCake.Controllers
             _context.SaveChanges();
             return RedirectToAction("AdminIndex");
         }
+
+        public IActionResult DetailProd(int id)
+        {
+            ProductViewModel product = _context.Set<Product>().Select(p => new ProductViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Date = p.Date,
+                CategoryId = p.CategoryId,
+                ImageProd = p.ImageProd ?? Consts.DefaultImageProd
+            }).SingleOrDefault(c => c.Id == id);
+
+            return View("DetailProd", product);
+        }
     }
 }

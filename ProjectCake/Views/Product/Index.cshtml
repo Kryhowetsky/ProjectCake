@@ -53,7 +53,7 @@
                             <div class="caption">
                                 <h4 class="pull-right">@item.Price ₴</h4>
                                 <h4>
-                                    <a href="#">@item.Name</a>
+                                    @Html.ActionLink(item.Name, "DetailProd","Product", new { id=item.Id})
                                 </h4>
                                 <p style="word-wrap:break-word;">@item.Description</p>
                             </div>

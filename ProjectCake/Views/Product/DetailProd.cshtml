@@ -1,13 +1,74 @@
-﻿
+﻿@model ProjectCake.Models.ProductViewModel
 
+@section Styles {
 
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+}
 
-
+@*facebook code for like and share
+    *******************START**********************@
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+@*********************FINISH**********************@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
+            
+            
+                <div class="col-md-6">
+                    <div class="col-md-offset-4">
+                        <img src="@Model.ImageProd" style="width:300px; height: 200px;" />
+                    </div>
+                </div>
+                <div class="col-md-offset-3">
+                    <h3>Date:</h3><p> @Model.Date<p>
+                </div>
+                <div><h3>Price:</h3><p>@Model.Price ₴</p></div>
 
-        </div>
+
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>Description</h3>
+                    <p>
+                        @Model.Description
+                        La la tial maro gxi diris okazo direktis al aux ni vidi
+                        pafilbruo la sovagxuloj vidis ondo de mia okazo bone kiam du
+                        Auf bringt stunden vom der zerstreuet halbverklungnen wird schmerz
+                        sehnen und das ich gestalten beifall was ich folgenden mein wenn ihr
+                        was klage entwöhntes ernsten ernsten des steigen der seh wird und
+                        äolsharfe besitze schöne festzuhalten wie einst ach strenge um walten
+                        schmerz blick umwittert mir naht trüben die halbverklungnengxin boato
+                    </p>
+                </div>
+                
+
+
+            </div>
+
+        <footer class="panel-footer col-md-12" style="background-color: #222222;">
+            <div class="col-md-4">
+                <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+            </div>
+            <div class="col-md-4" style="color:white;">
+                <p>
+                    You can simply order this cake just call us or also you
+                    can order your own cake via <a asp-area="" asp-controller="OrderCake" asp-action="OrderCake">online form</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h4 style="color:white;">Find us</h4>
+                <span><a href="http://www.facebook.com" target="_blank"><i class="fa fa-facebook" aria-hidden="true" style="font-size:24px;color:blue; margin-right: 15px;"></i></a></span>
+                <span><a href="https://plus.google.com/discover" target="_blank"><i class="fa fa-google-plus" aria-hidden="true" style="font-size:24px;color:red; margin-right: 15px;"></i></a></span>
+                <span><a href="https://www.instagram.com" target="_blank"><i class="fa fa-instagram" aria-hidden="true" style="font-size:24px;color:red"></i></a></span>
+            </div>
+        </footer>
     </div>
 </div>
