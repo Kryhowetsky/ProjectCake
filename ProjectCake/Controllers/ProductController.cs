@@ -25,26 +25,10 @@ namespace ProjectCake.Controllers
         {
             _context = context;
         }
-
-        [HttpGet]
+        
         public IActionResult Index()
         {
-            IEnumerable<ProductViewModel> model = _context.Set<Product>().ToList().Select(p => new ProductViewModel
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                Date = p.Date,
-                CategoryId = p.CategoryId,
-                ImageProd = p.ImageProd ?? Consts.DefaultImageProd
-
-
-            });
-
-
-
-            return View("Index", model);
+            return View();
         }
 
         [Authorize(Roles = "Admin")]
@@ -193,34 +177,34 @@ namespace ProjectCake.Controllers
 
         //Paginations
 
-        //public JsonResult Pagination(int page)
-        //{
-        //    var products = GetProducts(page);
+        public JsonResult Pagination(int page)
+        {
+            var products = GetProducts(page);
 
-        //    return Json(products);
-        //}
+            return Json(products);
+        }
 
-        //public PartialViewResult List(int page)
-        //{
-        //    var products = GetProducts(page);
+        public PartialViewResult List(int page)
+        {
+            var products = GetProducts(page);
 
-        //    return PartialView("_List", products);
-        //}
+            return PartialView("_List", products);
+        }
 
-        //private bool ProductExist(int id)
-        //{
-        //    return _context.Product.Any(p => p.Id == id);
-        //}
+        private bool ProductExist(int id)
+        {
+            return _context.Product.Any(p => p.Id == id);
+        }
 
-        //private List<Product> GetProducts(int page)
-        //{
-        //    var skipCount = page * Consts.ProductPaginationCount;
+        private List<Product> GetProducts(int page)
+        {
+            var skipCount = page * Consts.ProductPaginationCount;
 
-        //    var products = _context.Product.Skip(skipCount)
-        //                           .Take(Consts.ProductPaginationCount)
-        //                           .ToList();
+            var products = _context.Product.Skip(skipCount)
+                                   .Take(Consts.ProductPaginationCount)
+                                   .ToList();
 
-        //    return products;
-        //}
+            return products;
+        }
     }
 }

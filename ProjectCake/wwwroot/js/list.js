@@ -1,7 +1,7 @@
 ﻿
 
 $(function () {
-
+    debugger;
     var $list = $('#list');
     var listUrl = $list.data('url');
     var listPage = 0;
