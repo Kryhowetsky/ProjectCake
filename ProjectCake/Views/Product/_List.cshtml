@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ProjectCake.Models.ProductViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail" style="width:260px; height:405px;">
+            <img src="@Html.DisplayFor(modelItem => item.ImageProd)" alt="Image" style="width: 200px;" />
+            <div class="caption">
+                <h4 class="pull-right">@Html.DisplayFor(modelItem => item.Price) ₴</h4>
+                <h4>
+                    @Html.ActionLink(item.Name, "DetailProd", "Product", new { id = item.Id })
+                </h4>
+                <p style="word-wrap:break-word;">@item.Description</p>
+            </div>
+            <div class="ratings">
+                <p class="pull-right">15 reviews</p>
+                <p>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+}

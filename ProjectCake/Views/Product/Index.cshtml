@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectCake.Models.ProductViewModel>
+﻿
 
 @*@section Styles {
         <link rel="stylesheet" href="~/css/RatingStars.css" />
@@ -13,7 +13,7 @@
                 <a href="#" class="list-group-item">Category 2</a>
                 <a href="#" class="list-group-item">Category 3</a>
             </div>
-        </div>dsds
+        </div>
         <div class="col-md-9">
             <div class="row carousel-holder">
                 <div class="col-md-12">
@@ -43,34 +43,23 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" >
+               <div id="list" data-url='@Url.Action("List", "Product")'>
+                    @await Html.PartialAsync("_List")
+                </div>
+               
+                
 
-                @foreach (var item in Model)
-                {
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail" style="width:260px; height:405px;">
-                            <img src="@item.ImageProd" alt="Image" style="width: 200px;" />
-                            <div class="caption">
-                                <h4 class="pull-right">@item.Price ₴</h4>
-                                <h4>
-                                    @Html.ActionLink(item.Name, "DetailProd","Product", new { id=item.Id})
-                                </h4>
-                                <p style="word-wrap:break-word;">@item.Description</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                }
             </div>
+            <section>
+                <button id="list-button-previous" class="btn btn-primary">Previous</button>
+                <button id="list-button-next" class="btn btn-primary col-md-offset-1">Next</button>
+            </section>
+
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/list.js"></script>
+}

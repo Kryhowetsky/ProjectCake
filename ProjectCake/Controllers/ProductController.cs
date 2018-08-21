@@ -189,5 +189,38 @@ namespace ProjectCake.Controllers
 
             return View("DetailProd", product);
         }
+
+
+        //Paginations
+
+        //public JsonResult Pagination(int page)
+        //{
+        //    var products = GetProducts(page);
+
+        //    return Json(products);
+        //}
+
+        //public PartialViewResult List(int page)
+        //{
+        //    var products = GetProducts(page);
+
+        //    return PartialView("_List", products);
+        //}
+
+        //private bool ProductExist(int id)
+        //{
+        //    return _context.Product.Any(p => p.Id == id);
+        //}
+
+        //private List<Product> GetProducts(int page)
+        //{
+        //    var skipCount = page * Consts.ProductPaginationCount;
+
+        //    var products = _context.Product.Skip(skipCount)
+        //                           .Take(Consts.ProductPaginationCount)
+        //                           .ToList();
+
+        //    return products;
+        //}
     }
 }
