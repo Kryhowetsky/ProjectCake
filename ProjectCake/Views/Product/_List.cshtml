@@ -1,19 +1,23 @@
 ﻿@model IEnumerable<ProjectCake.Data.Product>
 
 
-@section Styles{ 
+@section Styles{
     <style type="text/css">
-        img{
-            background-image:url('../../wwwroot/images/chocolate.jpg')
+        img {
+            background-image: url('../../wwwroot/images/chocolate.jpg')
         }
     </style>
 }
+
+
+
+
 
 @foreach (var item in Model)
 {
     <div class="col-sm-4 col-lg-4 col-md-4">
         <div class="thumbnail" style="width:260px; height:405px;">
-            <img src="@Html.DisplayFor(modelItem => item.ImageProd)"  alt="Image" style="width: 200px;" />
+            <img src="https://bit.ly/2MHBpAp" alt="Image" style="width: 200px;" srcset="@item.ImageProd" />
             <div class="caption">
                 <h4 class="pull-right">@Html.DisplayFor(modelItem => item.Price) ₴</h4>
                 <h4>

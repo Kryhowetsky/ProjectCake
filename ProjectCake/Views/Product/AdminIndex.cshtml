@@ -15,6 +15,7 @@
         <table class="table table-bordered table-striped table-condensed">
             <thead>
                 <tr>
+                    <th>Product Id</th>
                     <th>CategoryId</th>
                     <th>Name</th>
                     <th>Description</th>
@@ -26,27 +27,28 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.CategoryId)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Date)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                        <td> 
-                        <img src="@item.ImageProd" alt="Image"  style="width: 200px;"/>
-                        </td>
-                        <td>
-                           
-                            <a id="editProductModal" data-toggle="modal" asp-action="AddEditProduct" asp-route-id="@item.Id" data-target="#modal-action-product"
-                               class="btn btn-info">
-                                <i class="glyphicon glyphicon-pencil"></i>  Edit
-                            </a>
-                            <div style="margin-top: 20px;"></div>
-                            <a id="deleteProductModal" data-toggle="modal" asp-action="DeleteProduct" asp-route-id="@item.Id" data-target="#modal-action-product" class="btn btn-danger">
-                                <i class="glyphicon glyphicon-trash"></i>  Delete
-                            </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CategoryId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td>
+                        <img src="@item.ImageProd" alt="Image" style="width: 200px;" />
+                    </td>
+                    <td>
+
+                        <a id="editProductModal" data-toggle="modal" asp-action="AddEditProduct" asp-route-id="@item.Id" data-target="#modal-action-product"
+                           class="btn btn-info">
+                            <i class="glyphicon glyphicon-pencil"></i>  Edit
+                        </a>
+                        <div style="margin-top: 20px;"></div>
+                        <a id="deleteProductModal" data-toggle="modal" asp-action="DeleteProduct" asp-route-id="@item.Id" data-target="#modal-action-product" class="btn btn-danger">
+                            <i class="glyphicon glyphicon-trash"></i>  Delete
+                        </a>
+                    </td>
+                </tr>
 
                 }
             </tbody>
