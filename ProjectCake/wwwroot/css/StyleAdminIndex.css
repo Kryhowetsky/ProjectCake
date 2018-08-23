@@ -1,0 +1,9 @@
+﻿
+
+table thead tr th {
+    text-align: center;
+}
+
+#break {
+    word-break: break-all
+}

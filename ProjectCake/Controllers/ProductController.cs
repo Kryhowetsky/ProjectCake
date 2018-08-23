@@ -43,7 +43,8 @@ namespace ProjectCake.Controllers
                 Price = p.Price,
                 Date = p.Date,
                 CategoryId = p.CategoryId,
-                ImageProd = p.ImageProd ?? Consts.DefaultImageProd
+                ImageProd = p.ImageProd ?? Consts.DefaultImageProd,
+                Category = p.Category
             });
 
             return View(model);
@@ -67,6 +68,7 @@ namespace ProjectCake.Controllers
                     model.Date = product.Date;
                     model.CategoryId = product.CategoryId;
                     model.ImageProd = product.ImageProd;
+                    
 
                 }
             }

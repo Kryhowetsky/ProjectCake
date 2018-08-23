@@ -10,7 +10,9 @@ namespace ProjectCake.Data
         public float Price { get; set; }
         public DateTime Date { get; set; }
         public string ImageProd { get ; set; } 
+
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        //public string CategoryName { get; set; }
+        public Category Category { get; set; }
     }
 }

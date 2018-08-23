@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using ProjectCake.Data;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace ProjectCake.Models
 {
@@ -14,7 +15,10 @@ namespace ProjectCake.Models
         public DateTime Date { get; set; }
         public string ImageProd { get; set; }
         public IFormFile File { get; set; }
+
         public int CategoryId { get; set; }
+        //public string CategoryName { get; set; } 
+        public Category Category { get; set; }
         public ICollection<CategoryViewModel> Categories { get; set; }
     }
 }
