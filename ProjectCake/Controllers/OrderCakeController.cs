@@ -37,6 +37,7 @@ namespace ProjectCake
                     Surname = orderCake.Surname,
                     Phone = orderCake.Phone,
                     Email = orderCake.Email,
+                    PreparedOrderDate = orderCake.PreparedOrderDate,
                     Comment = orderCake.Comment,
                     Date = orderCake.Date
                 };
@@ -73,6 +74,7 @@ namespace ProjectCake
                 Surname = orderCakeViewModel.Surname,
                 Phone = orderCakeViewModel.Phone,
                 Email = orderCakeViewModel.Email,
+                PreparedOrderDate = orderCakeViewModel.PreparedOrderDate,
                 Comment = orderCakeViewModel.Comment,
                 Date = DateTime.Now
                 //ImageUrl = orderCakeViewModel.File
@@ -89,7 +91,7 @@ namespace ProjectCake
 
                     message.To.Add("latvolpe@gmail.com");//Where mail will be sent
 
-                    message.Body = "Name: " + orderCakeViewModel.Name + orderCakeViewModel.Surname + "\nFrom: " + orderCakeViewModel.Email + "\nPhone: " + orderCakeViewModel.Phone + "\n" + orderCakeViewModel.Comment + "\nMessage: " + orderCakeViewModel.File;
+                    message.Body = "Name: " + orderCakeViewModel.Name + orderCakeViewModel.Surname + "\nFrom: " + orderCakeViewModel.Email + "\nPhone: " + orderCakeViewModel.Phone + "\nDate for prepared: " + orderCakeViewModel.PreparedOrderDate + "\n" + orderCakeViewModel.Comment + "\nMessage: " + orderCakeViewModel.File;
 
                     SmtpClient smtp = new SmtpClient();
 
