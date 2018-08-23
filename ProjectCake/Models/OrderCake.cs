@@ -9,6 +9,7 @@ namespace ProjectCake.Models
         public string Surname { get; set; }
         public long Phone { get; set; }
         public string Email { get; set; }
+        public DateTime PreparedOrderDate { get; set; }
         public string Comment { get; set; }
         public string ImageUrl { get; set; }
         public DateTime Date { get; set; }
