@@ -34,13 +34,12 @@
             <div>
                 <h4>Price:</h4><p>@Model.Price ₴</p>
             </div>
-            <div class="col-cl-offset-6"> <button class="btn btn-primary">Order this cake</button></div>
+            <div class="col-cl-offset-6"> <button class="btn btn-primary" id="orderThisCake">Order this cake</button></div>
             <div class="col-md-8" style="word-break:break-word;">
                 <h3>Description</h3>
                 <div class="">
                     <p>
                         @Model.Description
-
                     </p>
                 </div>
             </div>
@@ -64,3 +63,25 @@
         </footer>
     </div>
 </div>
+
+@section Scripts{ 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $('#orderThisCake').click(function () {
+            
+            //swal("Write email here:", {
+            //    content: "input",
+            //    type: "email",
+            //})
+            swal("Write phone here:", {
+                content: "input",
+                type: "tel",
+            })
+                .then((value) => {
+                    swal("Your order will be proceded");
+                });
+
+        });
+    </script>
+}
