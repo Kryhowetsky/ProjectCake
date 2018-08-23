@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ProjectCake.Data.Product>
+
+
+@section Styles{
+    <style type="text/css">
+        img {
+            background-image: url('../../wwwroot/images/chocolate.jpg')
+        }
+    </style>
+}
+
+
+
+
+
+@foreach (var item in Model)
+{
+    
+    <div class="col-sm-4 col-lg-4 col-md-4" style="margin-top:20px;" >
+        <div class="thumbnail" style="width:260px; height:405px;">
+            <img src="https://bit.ly/2MHBpAp" alt="Image" style="width: 200px;" srcset="@item.ImageProd" />
+            <div class="caption">
+                <h4 class="pull-right">@Html.DisplayFor(modelItem => item.Price) ₴</h4>
+                <h4>
+                    @Html.ActionLink(item.Name, "DetailProd", "Product", new { id = item.Id })
+                </h4>
+                <div style="overflow:hidden; height:180px;">
+                    <p>@item.Description</p>
+                </div>
+                
+            </div>
+            <div class="ratings">
+                <p class="pull-right">15 reviews</p>
+                <p>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+}
+
