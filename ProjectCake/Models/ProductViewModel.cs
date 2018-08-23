@@ -17,7 +17,7 @@ namespace ProjectCake.Models
         public IFormFile File { get; set; }
 
         public int CategoryId { get; set; }
-        //public string CategoryName { get; set; } 
+        public string CategoryName { get; set; } 
         public Category Category { get; set; }
         public ICollection<CategoryViewModel> Categories { get; set; }
     }

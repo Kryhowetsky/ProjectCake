@@ -44,7 +44,8 @@ namespace ProjectCake.Controllers
                 Date = p.Date,
                 CategoryId = p.CategoryId,
                 ImageProd = p.ImageProd ?? Consts.DefaultImageProd,
-                Category = p.Category
+                Category = p.Category,
+                CategoryName = _context.Set<Category>().SingleOrDefault(c => c.Id == p.CategoryId).Name,
             });
 
             return View(model);
@@ -68,7 +69,7 @@ namespace ProjectCake.Controllers
                     model.Date = product.Date;
                     model.CategoryId = product.CategoryId;
                     model.ImageProd = product.ImageProd;
-                    
+               
 
                 }
             }
