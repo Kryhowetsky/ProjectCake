@@ -45,7 +45,7 @@ namespace ProjectCake
                 orderCakeViewModels.Add(orderCakeViewModel);
             }
 
-            return View("OrderList", orderCakeViewModels);
+            return View("OrderList1", orderCakeViewModels);
         }
 
         [HttpGet]
