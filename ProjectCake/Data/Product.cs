@@ -12,7 +12,7 @@ namespace ProjectCake.Data
         public string ImageProd { get ; set; } 
 
         public int CategoryId { get; set; }
-        //public string CategoryName { get; set; }
+        
         public Category Category { get; set; }
     }
 }

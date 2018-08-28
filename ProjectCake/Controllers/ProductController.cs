@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjectCake.Const;
 using ProjectCake.Data;
 using ProjectCake.Data.Migrations;
@@ -9,15 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
-
+using System.Threading.Tasks;
 
 namespace ProjectCake.Controllers
 {
 
     public class ProductController : Controller
     {
-
+        
         private ApplicationDbContext _context;
 
 
@@ -33,22 +33,72 @@ namespace ProjectCake.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public IActionResult AdminIndex()
+        public async Task<IActionResult> AdminIndex(int? category, string name, int page=1, SortState sortOrder = SortState.NameAsc)
         {
-            IEnumerable<ProductViewModel> model = _context.Set<Product>().ToList().Select(p => new ProductViewModel
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                Date = p.Date,
-                CategoryId = p.CategoryId,
-                ImageProd = p.ImageProd ?? Consts.DefaultImageProd,
-                Category = p.Category,
-                CategoryName = _context.Set<Category>().SingleOrDefault(c => c.Id == p.CategoryId).Name,
-            });
+            //IEnumerable<ProductViewModel> model = _context.Set<Product>().ToList().Select(p => new ProductViewModel
+            //{
+            //    Id = p.Id,
+            //    Name = p.Name,
+            //    Description = p.Description,
+            //    Price = p.Price,
+            //    Date = p.Date,
+            //    CategoryId = p.CategoryId,
+            //    ImageProd = p.ImageProd ?? Consts.DefaultImageProd,
+            //    Category = p.Category,
+            //    CategoryName = _context.Set<Category>().SingleOrDefault(c => c.Id == p.CategoryId).Name,
+            //});
 
-            return View(model);
+            int pageSize = 6;
+
+            //Filtration
+            IQueryable<Product> products = _context.Product.Include(x => x.Category);
+            if (category != null && category != 0)
+            {
+                products = products.Where(p => p.CategoryId == category);
+            }
+            if (!String.IsNullOrEmpty(name))
+            {
+                products = products.Where(p => p.Name.Contains(name));
+            }
+
+            //Sort
+            switch (sortOrder)
+            {
+                case SortState.NameDesc:
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+                case SortState.PriceAsc:
+                    products = products.OrderBy(s => s.Price);
+                    break;
+                case SortState.PriceDesc:
+                    products = products.OrderByDescending(s => s.Price);
+                    break;
+                case SortState.CategoryAsc:
+                    products = products.OrderBy(s => s.Category.Name);
+                    break;
+                case SortState.CategoryDesc:
+                    products = products.OrderByDescending(s => s.Category.Name);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Name);
+                    break;
+
+            }
+
+            //Paging
+            var count = await products.CountAsync();
+            var items = await products.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            IndexSortViewModel viewModel = new IndexSortViewModel
+            {
+                PageViewModel = new PageViewModel(count, page, pageSize),
+                SortViewModel = new SortViewModel(sortOrder),
+                FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name),
+                Products = items
+            };
+
+
+            return View(viewModel);
         }
 
         [Authorize(Roles = "Admin")]
