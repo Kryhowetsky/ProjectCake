@@ -7,9 +7,9 @@
 @model IndexSortViewModel
 
 
-@section Styles {
+@*@section Styles {
     <link rel="stylesheet" href="~/css/StyleAdminIndex.css" />
-}
+}*@
 
 <div class="top-buffer"></div>
 
@@ -23,7 +23,7 @@
         @Html.TextBox("name", Model.FilterViewModel.SelectedName, htmlAttributes: new { @class = "form-control" })
 
         <label class="control-label">Category: </label>
-        @Html.DropDownList("company", Model.FilterViewModel.Categories as SelectList,
+        @Html.DropDownList("category", Model.FilterViewModel.Categories as SelectList,
                 htmlAttributes: new { @class = "form-control" })
 
         <input type="submit" value="Filter" class="btn btn-default" />
@@ -51,7 +51,7 @@
     </tr>
     @foreach (var u in Model.Products)
     {
-        <tr><td>@u.Name</td><td>@u.Price</td><td>@u.Category.Name</td></tr>
+        <tr><td>@u.Name</td><td>@u.Price₴</td><td>@u.Category.Name</td></tr>
     }
 </table>
 @if (Model.PageViewModel.HasPreviousPage)
@@ -152,7 +152,7 @@
     </div>*@
 
 @*@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-product", AreaLabeledId = "modal-action-product-label", Size = ModalSize.Medium })*@
-@section scripts
+@*@section scripts
     {
     <script src="~/js/product-index.js" asp-append-version="true"></script>
-}       
+}*@       

@@ -18,8 +18,9 @@ namespace ProjectCake.Controllers
     public class ProductController : Controller
     {
         
-        private ApplicationDbContext _context;
+        ApplicationDbContext _context;
 
+        
 
         public ProductController(ApplicationDbContext context)
         {

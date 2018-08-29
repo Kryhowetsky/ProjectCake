@@ -24,7 +24,7 @@ namespace ProjectCake.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<ProjectCake.Models.OrderCake> OrderCake { get; set; }
+        public DbSet<OrderCake> OrderCake { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
     }
