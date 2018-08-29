@@ -1,20 +1,14 @@
-﻿@*@model IEnumerable<ProductViewModel>
-    @using ProjectCake.Models
-    @using ProjectCake.Code*@
-
-
+﻿@model IndexSortViewModel
 @using ProjectCake.Models
-@model IndexSortViewModel
+@using ProjectCake.Code
 
 
-@*@section Styles {
+
+@section Styles {
     <link rel="stylesheet" href="~/css/StyleAdminIndex.css" />
-}*@
+}
 
 <div class="top-buffer"></div>
-
-
-
 
 <h1>List of Cakes</h1>
 <form method="get">
@@ -29,31 +23,71 @@
         <input type="submit" value="Filter" class="btn btn-default" />
     </div>
 </form>
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">Cakes</div>
+    <div class="panel-body">
+        <div class="btn-group">
+            <a id="createEditBookModal" data-toggle="modal" asp-action="AddEditProduct" data-target="#modal-action-product" class="btn btn-primary">
+                <i class="glyphicon glyphicon-plus"></i>  Add Product
+            </a>
+        </div>
+        <div class="top-buffer"></div>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-action="AdminIndex" asp-route-sortOrder="@(Model.SortViewModel.CategorySort)"
+                           asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                           asp-route-company="@(Model.FilterViewModel.SelectedCategory)">Category</a>
+                    </th>
+                    <th>
+                        <a asp-action="AdminIndex"
+                           asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+                           asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                           asp-route-company="@(Model.FilterViewModel.SelectedCategory)">Name</a>
+                    </th>
+                    <th>
+                        <a asp-action="AdminIndex" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
+                           asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                           asp-route-company="@(Model.FilterViewModel.SelectedCategory)">Price</a>
+                    </th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Image</th>
+                    <th>Edit/Delete</th>
 
-<table class="table">
-    <tr>
-        <th>
-            <a asp-action="AdminIndex"
-               asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
-               asp-route-name="@(Model.FilterViewModel.SelectedName)"
-               asp-route-company="@(Model.FilterViewModel.SelectedCategory)">Name</a>
-        </th>
-        <th>
-            <a asp-action="AdminIndex" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
-               asp-route-name="@(Model.FilterViewModel.SelectedName)"
-               asp-route-company="@(Model.FilterViewModel.SelectedCategory)">Price</a>
-        </th>
-        <th>
-            <a asp-action="AdminIndex" asp-route-sortOrder="@(Model.SortViewModel.CategorySort)"
-               asp-route-name="@(Model.FilterViewModel.SelectedName)"
-               asp-route-company="@(Model.FilterViewModel.SelectedCategory)">Category</a>
-        </th>
-    </tr>
-    @foreach (var u in Model.Products)
-    {
-        <tr><td>@u.Name</td><td>@u.Price₴</td><td>@u.Category.Name</td></tr>
-    }
-</table>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model.Products)
+                {
+                    <tr>
+                        <td>@u.Category.Name</td>
+                        <td>@u.Name</td>
+                        <td>@u.Price₴</td>
+                        <td id="break">@u.Description</td>
+                        <td>@u.Date</td>
+                        <td>
+                            <img src="@u.ImageProd" alt="Image" style="width: 200px;" />
+                        </td>
+                        <td>
+
+                            <a id="editProductModal" data-toggle="modal" asp-action="AddEditProduct" asp-route-id="@u.Id" data-target="#modal-action-product"
+                               class="btn btn-info">
+                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                            </a>
+                            <div style="margin-top: 20px;"></div>
+                            <a id="deleteProductModal" data-toggle="modal" asp-action="DeleteProduct" asp-route-id="@u.Id" data-target="#modal-action-product" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 @if (Model.PageViewModel.HasPreviousPage)
 {
     <a asp-action="AdminIndex"
@@ -79,80 +113,27 @@
     </a>
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@*<div class="panel panel-primary">
-        <div class="panel-heading panel-head">Cakes</div>
-        <div class="panel-body">
-            <div class="btn-group">
-                <a id="createEditBookModal" data-toggle="modal" asp-action="AddEditProduct" data-target="#modal-action-product" class="btn btn-primary">
-                    <i class="glyphicon glyphicon-plus"></i>  Add Product
-                </a>
-            </div>
-            <div class="top-buffer"></div>
-            <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                    <tr>
-                        <th>Category Name</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Price ₴</th>
-                        <th>Image</th>
-                        <th>Edit/Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                            <td id="break">@Html.DisplayFor(modelItem => item.Description)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Date)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Price)₴</td>
-                            <td>
-                                <img src="@item.ImageProd" alt="Image" style="width: 200px;" />
-                            </td>
-                            <td>
-
-                                <a id="editProductModal" data-toggle="modal" asp-action="AddEditProduct" asp-route-id="@item.Id" data-target="#modal-action-product"
-                                   class="btn btn-info">
-                                    <i class="glyphicon glyphicon-pencil"></i>  Edit
-                                </a>
-                                <div style="margin-top: 20px;"></div>
-                                <a id="deleteProductModal" data-toggle="modal" asp-action="DeleteProduct" asp-route-id="@item.Id" data-target="#modal-action-product" class="btn btn-danger">
-                                    <i class="glyphicon glyphicon-trash"></i>  Delete
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>*@
-
-@*@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-product", AreaLabeledId = "modal-action-product-label", Size = ModalSize.Medium })*@
-@*@section scripts
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-product", AreaLabeledId = "modal-action-product-label", Size = ModalSize.Medium })
+@section scripts
     {
     <script src="~/js/product-index.js" asp-append-version="true"></script>
-}*@       
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
