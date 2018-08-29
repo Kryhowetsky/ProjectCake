@@ -1,9 +1,52 @@
 ﻿
 
+
+
+#panel {
+    margin-top: 25px;
+}
+
+#filter {
+    margin-top: -34px;
+}
+
+#btn-filter {
+    background-color: #5bc0de;
+    color: white;
+}
+
+#tbl {
+    margin-top: 15px;
+}
+
 table thead tr th {
     text-align: center;
 }
 
+table tbody tr td {
+    text-align:center;
+}
+
+
 #break {
-    word-break: break-all
+    word-break: break-all;
+    text-align:justify;
+}
+
+img {
+    width: 200px;
+}
+
+#editProductModal {
+    width: 80px;
+    margin-top: 20px;
+}
+
+
+#div1 {
+    margin-top: 20px;
+}
+
+#deleteProductModal {
+    width: 80px;
 }

@@ -3,37 +3,45 @@
 @using ProjectCake.Code
 
 
-
-@section Styles {
-    <link rel="stylesheet" href="~/css/StyleAdminIndex.css" />
+@section Styles{
+    <link rel="stylesheet" type="text/css" href="~/css/StyleAdminIndex.css"/>
 }
 
+
+
+
+
+
 <div class="top-buffer"></div>
+<h1>Admin panel</h1>
 
-<h1>List of Cakes</h1>
-<form method="get">
-    <div class="form-inline">
-        <label class="control-label">Name:</label>
-        @Html.TextBox("name", Model.FilterViewModel.SelectedName, htmlAttributes: new { @class = "form-control" })
 
-        <label class="control-label">Category: </label>
-        @Html.DropDownList("category", Model.FilterViewModel.Categories as SelectList,
-                htmlAttributes: new { @class = "form-control" })
-
-        <input type="submit" value="Filter" class="btn btn-default" />
-    </div>
-</form>
-<div class="top-buffer"></div>
-<div class="panel panel-primary">
-    <div class="panel-heading panel-head">Cakes</div>
+<div class="panel panel-primary" id="panel">
+    <div class="panel-heading panel-head">Cakes List</div>
     <div class="panel-body">
         <div class="btn-group">
             <a id="createEditBookModal" data-toggle="modal" asp-action="AddEditProduct" data-target="#modal-action-product" class="btn btn-primary">
                 <i class="glyphicon glyphicon-plus"></i>  Add Product
             </a>
         </div>
-        <div class="top-buffer"></div>
-        <table class="table table-bordered table-striped table-condensed">
+
+        <div class="col-md-offset-3" id="filter">
+            <form method="get">
+                <div class="form-inline">
+                    <label class="control-label">Name:</label>
+                    @Html.TextBox("name", Model.FilterViewModel.SelectedName, htmlAttributes: new { @class = "form-control" })
+
+                    <label class="control-label">Category: </label>
+                    @Html.DropDownList("category", Model.FilterViewModel.Categories as SelectList,
+                            htmlAttributes: new { @class = "form-control" })
+
+                    <input type="submit" value="Filter" class="btn btn-default" id="btn-filter"/>
+                </div>
+            </form>
+        </div>
+
+
+        <table class="table table-bordered table-striped table-condensed" id="tbl">
             <thead>
                 <tr>
                     <th>
@@ -69,15 +77,15 @@
                         <td id="break">@u.Description</td>
                         <td>@u.Date</td>
                         <td>
-                            <img src="@u.ImageProd" alt="Image" style="width: 200px;" />
+                            <img src="@u.ImageProd" alt="Image"/>
                         </td>
                         <td>
 
                             <a id="editProductModal" data-toggle="modal" asp-action="AddEditProduct" asp-route-id="@u.Id" data-target="#modal-action-product"
-                               class="btn btn-info">
-                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                               class="btn btn-info" >
+                                <i class="glyphicon glyphicon-pencil"></i> Edit
                             </a>
-                            <div style="margin-top: 20px;"></div>
+                            <div id="div1"></div>
                             <a id="deleteProductModal" data-toggle="modal" asp-action="DeleteProduct" asp-route-id="@u.Id" data-target="#modal-action-product" class="btn btn-danger">
                                 <i class="glyphicon glyphicon-trash"></i>  Delete
                             </a>
@@ -93,11 +101,11 @@
     <a asp-action="AdminIndex"
        asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
        asp-route-name="@(Model.FilterViewModel.SelectedName)"
-       asp-route-company="@(Model.FilterViewModel.SelectedCategory)"
+       asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
        asp-route-sortorder="@(Model.SortViewModel.Current)"
        class="btn btn-default btn">
         <i class="glyphicon glyphicon-chevron-left"></i>
-        Назад
+        Back
     </a>
 }
 @if (Model.PageViewModel.HasNextPage)
@@ -105,10 +113,10 @@
     <a asp-action="AdminIndex"
        asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
        asp-route-name="@(Model.FilterViewModel.SelectedName)"
-       asp-route-company="@(Model.FilterViewModel.SelectedCategory)"
+       asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
        asp-route-sortorder="@(Model.SortViewModel.Current)"
        class="btn btn-default btn">
-        Вперед
+        Next
         <i class="glyphicon glyphicon-chevron-right"></i>
     </a>
 }
