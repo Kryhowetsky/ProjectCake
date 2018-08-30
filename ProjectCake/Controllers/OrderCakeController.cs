@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.IO;
+using System.Net.Mail;
 using ProjectCake.Data;
 using ProjectCake.Models;
 using ProjectCake.Repository;
-using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.IO;
-using System.Net.Mail;
+using Microsoft.AspNetCore.Hosting;
+
+
 
 namespace ProjectCake
 {
