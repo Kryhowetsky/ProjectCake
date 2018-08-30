@@ -1,6 +1,4 @@
-﻿
-
-$(function () {
+﻿$(function () {
     debugger;
     var $list = $('#list');
     var listUrl = $list.data('url');
@@ -15,7 +13,6 @@ $(function () {
         listPage--;
         getList(listPage);
     });
-
 
     $('#list-button-next').click(function () {
         listPage++;

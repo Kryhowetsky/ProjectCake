@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace ProjectCake.Data
 {
@@ -9,10 +8,10 @@ namespace ProjectCake.Data
         public string Description { get; set; }
         public float Price { get; set; }
         public DateTime Date { get; set; }
-        public string ImageProd { get ; set; } 
+        public string ImageProd { get; set; }
 
         public int CategoryId { get; set; }
-        
+
         public Category Category { get; set; }
     }
 }

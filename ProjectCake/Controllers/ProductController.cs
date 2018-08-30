@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectCake.Const;
 using ProjectCake.Data;
-using ProjectCake.Data.Migrations;
 using ProjectCake.Models;
 using System;
 using System.Collections.Generic;
@@ -14,19 +13,15 @@ using System.Threading.Tasks;
 
 namespace ProjectCake.Controllers
 {
-
     public class ProductController : Controller
     {
-        
-        ApplicationDbContext _context;
-
-        
+        private ApplicationDbContext _context;
 
         public ProductController(ApplicationDbContext context)
         {
             _context = context;
         }
-        
+
         public IActionResult Index()
         {
             return View();
@@ -34,7 +29,7 @@ namespace ProjectCake.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> AdminIndex(int? category, string name, int page=1, SortState sortOrder = SortState.NameAsc)
+        public async Task<IActionResult> AdminIndex(int? category, string name, int page = 1, SortState sortOrder = SortState.NameAsc)
         {
             //IEnumerable<ProductViewModel> model = _context.Set<Product>().ToList().Select(p => new ProductViewModel
             //{
@@ -68,22 +63,26 @@ namespace ProjectCake.Controllers
                 case SortState.NameDesc:
                     products = products.OrderByDescending(s => s.Name);
                     break;
+
                 case SortState.PriceAsc:
                     products = products.OrderBy(s => s.Price);
                     break;
+
                 case SortState.PriceDesc:
                     products = products.OrderByDescending(s => s.Price);
                     break;
+
                 case SortState.CategoryAsc:
                     products = products.OrderBy(s => s.Category.Name);
                     break;
+
                 case SortState.CategoryDesc:
                     products = products.OrderByDescending(s => s.Category.Name);
                     break;
+
                 default:
                     products = products.OrderBy(s => s.Name);
                     break;
-
             }
 
             //Paging
@@ -97,7 +96,6 @@ namespace ProjectCake.Controllers
                 FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name),
                 Products = items
             };
-
 
             return View(viewModel);
         }
@@ -120,8 +118,6 @@ namespace ProjectCake.Controllers
                     model.Date = product.Date;
                     model.CategoryId = product.CategoryId;
                     model.ImageProd = product.ImageProd;
-               
-
                 }
             }
 
@@ -156,9 +152,6 @@ namespace ProjectCake.Controllers
                     product.ModifiedDate = DateTime.Now;
                     product.CategoryId = model.CategoryId;
 
-
-
-
                     if (isNew)
                     {
                         _context.Add(product);
@@ -180,8 +173,6 @@ namespace ProjectCake.Controllers
                             product.ImageProd = pathForClient;
                             _context.SaveChanges();
                         }
-
-
                     }
                 }
             }
@@ -227,7 +218,6 @@ namespace ProjectCake.Controllers
 
             return View("DetailProd", product);
         }
-
 
         //Paginations
 

@@ -10,7 +10,6 @@ using System.Net.Mail;
 
 namespace ProjectCake
 {
-    
     public class OrderCakeController : Controller
     {
         private readonly IHostingEnvironment hostingEnvironment;
@@ -64,8 +63,6 @@ namespace ProjectCake
                 {
                     orderCakeViewModel.File.CopyTo(stream);
                 }
-                
-
             }
 
             var orderCare = new OrderCake
@@ -118,7 +115,5 @@ namespace ProjectCake
 
             return RedirectToAction("Index");
         }
-
-        
     }
 }

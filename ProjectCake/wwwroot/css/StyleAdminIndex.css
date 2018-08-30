@@ -1,8 +1,4 @@
-﻿
-
-
-
-#panel {
+﻿#panel {
     margin-top: 25px;
 }
 
@@ -27,7 +23,6 @@ table tbody tr td {
     text-align:center;
 }
 
-
 #break {
     word-break: break-all;
     text-align:justify;
@@ -41,7 +36,6 @@ img {
     width: 80px;
     margin-top: 20px;
 }
-
 
 #div1 {
     margin-top: 20px;

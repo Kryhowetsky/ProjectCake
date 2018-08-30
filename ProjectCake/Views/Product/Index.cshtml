@@ -1,9 +1,7 @@
-﻿
-
-@*@section Styles {
+﻿@section Styles {
         <link rel="stylesheet" href="~/css/RatingStars.css" />
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    }*@
+    }
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -25,13 +23,13 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img class="slide-image" src="~/images/cake1.jpg" alt="" >
+                                <img class="slide-image" src="~/images/cake1.jpg" alt="">
                             </div>
                             <div class="item">
-                                <img class="slide-image" src="~/images/cake2.jpg" alt="" >
+                                <img class="slide-image" src="~/images/cake2.jpg" alt="">
                             </div>
                             <div class="item">
-                                <img class="slide-image" src="~/images/cake3.jpg" alt="" >
+                                <img class="slide-image" src="~/images/cake3.jpg" alt="">
                             </div>
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -43,19 +41,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row" >
+            <div class="row">
                <div id="list" data-url='@Url.Action("List", "Product")'>
-                    
                 </div>
-               
-                
-
             </div>
             <section>
                 <button id="list-button-previous" class="btn btn-primary">Previous</button>
                 <button id="list-button-next" class="btn btn-primary col-md-offset-1">Next</button>
             </section>
-
         </div>
     </div>
 </div>
