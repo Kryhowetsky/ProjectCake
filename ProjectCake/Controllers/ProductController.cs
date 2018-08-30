@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectCake.Const;
 using ProjectCake.Data;
-using ProjectCake.Data.Migrations;
 using ProjectCake.Models;
 using System;
 using System.Collections.Generic;
