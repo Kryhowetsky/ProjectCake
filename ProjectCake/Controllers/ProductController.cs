@@ -26,9 +26,38 @@ namespace ProjectCake.Controllers
             _context = context;
         }
         
-        public IActionResult Index()
+        public IActionResult Index(int? category, string name)
         {
-            return View();
+
+             IEnumerable < ProductViewModel > model = _context.Set<Product>().ToList().Select(p => new ProductViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Date = p.Date,
+                CategoryId = p.CategoryId,
+                ImageProd = p.ImageProd ?? Consts.DefaultImageProd,
+                Category = p.Category,
+                CategoryName = _context.Set<Category>().SingleOrDefault(c => c.Id == p.CategoryId).Name,
+            });
+            IQueryable<Product> products = _context.Product.Include(x => x.Category);
+            if (category != null && category != 0)
+            {
+                products = products.Where(p => p.CategoryId == category);
+            }
+            if (!String.IsNullOrEmpty(name))
+            {
+                products = products.Where(p => p.Name.Contains(name));
+            }
+
+            IndexSortViewModel viewModel = new IndexSortViewModel
+            {
+                
+                FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name),
+               
+            };
+            return View(viewModel);
         }
 
         [Authorize(Roles = "Admin")]

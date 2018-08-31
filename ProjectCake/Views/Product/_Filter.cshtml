@@ -1,0 +1,18 @@
+﻿@model IndexSortViewModel
+@using ProjectCake.Models
+
+
+<div class="col-md-offset-3" id="filter">
+    <form method="get">
+        <div class="form-inline">
+            <label class="control-label">Name:</label>
+            @Html.TextBox("name", Model.FilterViewModel.SelectedName, htmlAttributes: new { @class = "form-control" })
+
+            <label class="control-label">Category: </label>
+            @Html.DropDownList("category", Model.FilterViewModel.Categories as SelectList,
+                    htmlAttributes: new { @class = "form-control" })
+
+            <input type="submit" value="Filter" class="btn btn-default" id="btn-filter" />
+        </div>
+    </form>
+</div>
