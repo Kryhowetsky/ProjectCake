@@ -1,10 +1,10 @@
-﻿@model IndexSortViewModel
-@using ProjectCake.Models
+﻿@*@model IndexSortViewModel
+    @using ProjectCake.Models*@
 @using ProjectCake.Code
 
 
 @section Styles{
-    <link rel="stylesheet" type="text/css" href="~/css/StyleAdminIndex.css"/>
+    <link rel="stylesheet" type="text/css" href="~/css/StyleAdminIndex.css" />
 }
 
 
@@ -23,19 +23,19 @@
         @Html.Partial("_Filter")
 
         @*<div class="col-md-offset-3" id="filter">
-            <form method="get">
-                <div class="form-inline">
-                    <label class="control-label">Name:</label>
-                    @Html.TextBox("name", Model.FilterViewModel.SelectedName, htmlAttributes: new { @class = "form-control" })
+                <form method="get">
+                    <div class="form-inline">
+                        <label class="control-label">Name:</label>
+                        @Html.TextBox("name", Model.FilterViewModel.SelectedName, htmlAttributes: new { @class = "form-control" })
 
-                    <label class="control-label">Category: </label>
-                    @Html.DropDownList("category", Model.FilterViewModel.Categories as SelectList,
-                            htmlAttributes: new { @class = "form-control" })
+                        <label class="control-label">Category: </label>
+                        @Html.DropDownList("category", Model.FilterViewModel.Categories as SelectList,
+                                htmlAttributes: new { @class = "form-control" })
 
-                    <input type="submit" value="Filter" class="btn btn-default" id="btn-filter"/>
-                </div>
-            </form>
-        </div>*@
+                        <input type="submit" value="Filter" class="btn btn-default" id="btn-filter"/>
+                    </div>
+                </form>
+            </div>*@
 
 
         <table class="table table-bordered table-striped table-condensed" id="tbl">
@@ -61,7 +61,6 @@
                     <th>Date</th>
                     <th>Image</th>
                     <th>Edit/Delete</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -74,12 +73,11 @@
                         <td id="break">@u.Description</td>
                         <td>@u.Date</td>
                         <td>
-                            <img src="@u.ImageProd" alt="Image"/>
+                            <img src="@u.ImageProd" alt="Image" />
                         </td>
                         <td>
-
                             <a id="editProductModal" data-toggle="modal" asp-action="AddEditProduct" asp-route-id="@u.Id" data-target="#modal-action-product"
-                               class="btn btn-info" >
+                               class="btn btn-info">
                                 <i class="glyphicon glyphicon-pencil"></i> Edit
                             </a>
                             <div id="div1"></div>

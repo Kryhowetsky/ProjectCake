@@ -28,19 +28,6 @@ namespace ProjectCake.Controllers
         
         public IActionResult Index(int? category, string name)
         {
-
-             IEnumerable < ProductViewModel > model = _context.Set<Product>().ToList().Select(p => new ProductViewModel
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                Date = p.Date,
-                CategoryId = p.CategoryId,
-                ImageProd = p.ImageProd ?? Consts.DefaultImageProd,
-                Category = p.Category,
-                CategoryName = _context.Set<Category>().SingleOrDefault(c => c.Id == p.CategoryId).Name,
-            });
             IQueryable<Product> products = _context.Product.Include(x => x.Category);
             if (category != null && category != 0)
             {
@@ -50,12 +37,10 @@ namespace ProjectCake.Controllers
             {
                 products = products.Where(p => p.Name.Contains(name));
             }
-
+            
             IndexSortViewModel viewModel = new IndexSortViewModel
-            {
-                
-                FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name),
-               
+            {  
+                FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name)
             };
             return View(viewModel);
         }
@@ -285,7 +270,6 @@ namespace ProjectCake.Controllers
             var products = _context.Product.Skip(skipCount)
                                    .Take(Consts.ProductPaginationCount)
                                    .ToList();
-
             return products;
         }
     }

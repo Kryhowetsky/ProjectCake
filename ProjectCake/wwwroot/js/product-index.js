@@ -10,11 +10,11 @@
         }
         $this.init = function () {
             initilizeModel();
-        }
+        };
     }
     $(function () {
         var self = new Product();
         self.init();
-    })
-}(jQuery))
+    });
+}(jQuery));
 
