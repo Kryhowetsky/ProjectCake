@@ -17,10 +17,9 @@ namespace ProjectCake.Controllers
     public class ProductController : Controller
     {
         
-        ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
         
-
         public ProductController(ApplicationDbContext context)
         {
             _context = context;
@@ -40,7 +39,8 @@ namespace ProjectCake.Controllers
             
             IndexSortViewModel viewModel = new IndexSortViewModel
             {  
-                FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name)
+                FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name),
+                
             };
             return View(viewModel);
         }
