@@ -25,8 +25,11 @@ namespace ProjectCake.Controllers
             _context = context;
         }
         
-        public IActionResult Index(int? category, string name)
+        public async Task<IActionResult> Index(int? category, string name, int page = 1, SortState sortOrder = SortState.NameAsc)
         {
+
+            int pageSize = 6;
+
             IQueryable<Product> products = _context.Product.Include(x => x.Category);
             if (category != null && category != 0)
             {
@@ -36,11 +39,41 @@ namespace ProjectCake.Controllers
             {
                 products = products.Where(p => p.Name.Contains(name));
             }
-            
+
+
+            switch (sortOrder)
+            {
+                case SortState.NameDesc:
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+                case SortState.PriceAsc:
+                    products = products.OrderBy(s => s.Price);
+                    break;
+                case SortState.PriceDesc:
+                    products = products.OrderByDescending(s => s.Price);
+                    break;
+                case SortState.CategoryAsc:
+                    products = products.OrderBy(s => s.Category.Name);
+                    break;
+                case SortState.CategoryDesc:
+                    products = products.OrderByDescending(s => s.Category.Name);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Name);
+                    break;
+
+            }
+
+            var count = await products.CountAsync();
+            var items = await products.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+
             IndexSortViewModel viewModel = new IndexSortViewModel
-            {  
+            {
+                PageViewModel = new PageViewModel(count, page, pageSize),
+                SortViewModel = new SortViewModel(sortOrder),
                 FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name),
-                
+                Products = items
             };
             return View(viewModel);
         }
@@ -242,35 +275,35 @@ namespace ProjectCake.Controllers
         }
 
 
-        //Paginations
+        ////Paginations
 
-        public JsonResult Pagination(int page)
-        {
-            var products = GetProducts(page);
+        //public JsonResult Pagination(int page)
+        //{
+        //    var products = GetProducts(page);
 
-            return Json(products);
-        }
+        //    return Json(products);
+        //}
 
-        public PartialViewResult List(int page)
-        {
-            var products = GetProducts(page);
+        //public PartialViewResult List(int page)
+        //{
+        //    var products = GetProducts(page);
 
-            return PartialView("_List", products);
-        }
+        //    return PartialView("_List", products);
+        //}
 
-        private bool ProductExist(int id)
-        {
-            return _context.Product.Any(p => p.Id == id);
-        }
+        //private bool ProductExist(int id)
+        //{
+        //    return _context.Product.Any(p => p.Id == id);
+        //}
 
-        private List<Product> GetProducts(int page)
-        {
-            var skipCount = page * Consts.ProductPaginationCount;
+        //private List<Product> GetProducts(int page)
+        //{
+        //    var skipCount = page * Consts.ProductPaginationCount;
 
-            var products = _context.Product.Skip(skipCount)
-                                   .Take(Consts.ProductPaginationCount)
-                                   .ToList();
-            return products;
-        }
+        //    var products = _context.Product.Skip(skipCount)
+        //                           .Take(Consts.ProductPaginationCount)
+        //                           .ToList();
+        //    return products;
+        //}
     }
 }

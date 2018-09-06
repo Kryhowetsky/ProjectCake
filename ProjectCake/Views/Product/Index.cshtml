@@ -45,14 +45,73 @@
                 </div>
             </div>
             <div class="row">
-                <div id="list" data-url='@Url.Action("List", "Product")'>
+                <div id="list" @*data-url='@Url.Action("List", "Product")' *@>
+
+
+                    @foreach (var item in Model.Products)
+                    {
+
+                        <div class="col-sm-4 col-lg-4 col-md-4" style="margin-top:20px;">
+                            <div class="thumbnail" style="width:260px; height:405px;">
+                                <img src="https://bit.ly/2MHBpAp" alt="Image" style="width: 200px;" srcset="@item.ImageProd" />
+                                <div class="caption">
+                                    <h4 class="pull-right">@Html.DisplayFor(modelItem => item.Price) ₴</h4>
+                                    <h4>
+                                        @Html.ActionLink(item.Name, "DetailProd", "Product", new { id = item.Id })
+                                    </h4>
+                                    <div style="overflow:hidden; height:180px;">
+                                        <p>@item.Description</p>
+                                    </div>
+
+                                </div>
+                                <div class="ratings">
+                                    <p class="pull-right">15 reviews</p>
+                                    <p>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
 
                 </div>
             </div>
-            <section>
-                    <button id="list-button-previous" class="btn btn-primary">Previous</button>
-                    <button id="list-button-next" class="btn btn-primary col-md-offset-1">Next</button>
-                </section>
+            @*<section>
+            <button id="list-button-previous" class="btn btn-primary">Previous</button>
+            <button id="list-button-next" class="btn btn-primary col-md-offset-1">Next</button>
+        </section>*@
+
+            @if (Model.PageViewModel.HasPreviousPage)
+            {
+                <a asp-action="AdminIndex"
+                   asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
+                   asp-route-sortorder="@(Model.SortViewModel.Current)"
+                   class="btn btn-default btn">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    Back
+                </a>
+            }
+            @if (Model.PageViewModel.HasNextPage)
+            {
+                <a asp-action="AdminIndex"
+                   asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
+                   asp-route-sortorder="@(Model.SortViewModel.Current)"
+                   class="btn btn-default btn">
+                    Next
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                </a>
+            }
+
+
+
         </div>
     </div>
 </div>
@@ -61,6 +120,6 @@
 
 
 
-@section Scripts {
+@*@section Scripts {
         <script src="~/js/list.js"></script>
-    }
+    }*@
