@@ -260,6 +260,15 @@ namespace ProjectCake.Controllers
 
         public IActionResult DetailProd(int id)
         {
+            //RespondViewModel model = _context.Set<Respond>().Select(m => new RespondViewModel
+            //{
+            //    Id = m.Id,
+            //    Name = m.Name,
+            //    Email = m.Email,
+            //    Text = m.Text
+            //}).SingleOrDefault(h => h.Id);
+
+
             ProductViewModel product = _context.Set<Product>().Select(p => new ProductViewModel
             {
                 Id = p.Id,
@@ -271,39 +280,9 @@ namespace ProjectCake.Controllers
                 ImageProd = p.ImageProd ?? Consts.DefaultImageProd
             }).SingleOrDefault(c => c.Id == id);
 
-            return View("DetailProd", product);
+            return View("DetailProd",  product);
         }
-
-
-        ////Paginations
-
-        //public JsonResult Pagination(int page)
-        //{
-        //    var products = GetProducts(page);
-
-        //    return Json(products);
-        //}
-
-        //public PartialViewResult List(int page)
-        //{
-        //    var products = GetProducts(page);
-
-        //    return PartialView("_List", products);
-        //}
-
-        //private bool ProductExist(int id)
-        //{
-        //    return _context.Product.Any(p => p.Id == id);
-        //}
-
-        //private List<Product> GetProducts(int page)
-        //{
-        //    var skipCount = page * Consts.ProductPaginationCount;
-
-        //    var products = _context.Product.Skip(skipCount)
-        //                           .Take(Consts.ProductPaginationCount)
-        //                           .ToList();
-        //    return products;
-        //}
+        
+        
     }
 }

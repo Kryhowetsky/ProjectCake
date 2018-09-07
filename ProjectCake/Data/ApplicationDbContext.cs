@@ -27,5 +27,6 @@ namespace ProjectCake.Data
         public DbSet<OrderCake> OrderCake { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<Respond> Responds { get; set; }
     }
 }

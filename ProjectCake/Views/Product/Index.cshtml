@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="row">
-                <div id="list" @*data-url='@Url.Action("List", "Product")' *@>
+                <div id="list">
 
 
                     @foreach (var item in Model.Products)
@@ -87,7 +87,7 @@
 
             @if (Model.PageViewModel.HasPreviousPage)
             {
-                <a asp-action="AdminIndex"
+                <a asp-action="Index"
                    asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
                    asp-route-name="@(Model.FilterViewModel.SelectedName)"
                    asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
@@ -99,7 +99,7 @@
             }
             @if (Model.PageViewModel.HasNextPage)
             {
-                <a asp-action="AdminIndex"
+                <a asp-action="Index"
                    asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
                    asp-route-name="@(Model.FilterViewModel.SelectedName)"
                    asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
