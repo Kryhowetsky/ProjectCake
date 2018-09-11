@@ -8,8 +8,8 @@ namespace ProjectCake.Models
 {
     public class IndexDetailProdRespondViewModel
     {
-        public IEnumerable<Product> Products { get; set; }
-        public RespondViewModel RespondViewModel { get; set; }
-        public ProductViewModel ProductViewModel { get; internal set; }
+        public IEnumerable<ProductViewModel> Products { get; set; }
+        public IEnumerable<RespondViewModel> RespondViewModel { get; set; }
+        public IEnumerable<ProductViewModel> ProductViewModel { get; internal set; }
     }
 }

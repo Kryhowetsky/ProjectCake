@@ -63,9 +63,7 @@ namespace ProjectCake
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     orderCakeViewModel.File.CopyTo(stream);
-                }
-                
-
+                } 
             }
 
             var orderCare = new OrderCake
