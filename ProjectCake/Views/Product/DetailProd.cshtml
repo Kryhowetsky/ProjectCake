@@ -1,4 +1,5 @@
-﻿@model ProjectCake.Models.ProductViewModel
+﻿@using ProjectCake.Models
+@model DetailRespondViewModel
 
 @section Styles {
 
@@ -24,44 +25,42 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="col-md-offset-4">
-                    <img src="@Model.ImageProd" style="width:300px; height: 200px;" />
+                    <img src="@Model.ProductViewModel.ImageProd" style="width:300px; height: 200px;" />
                 </div>
             </div>
             <div class="col-md-offset-3">
-                <h3 style="color:dodgerblue;">@Model.Name</h3>
-                <h4>Date:</h4><p> @Model.Date.ToString("d 'of' MMMM  yyyy")<p>
+                <h3 style="color:dodgerblue;">@Model.ProductViewModel.Name</h3>
+                <h4>Date:</h4><p> @Model.ProductViewModel.Date.ToString("d 'of' MMMM  yyyy")<p>
             </div>
             <div>
-                <h4>Price:</h4><p>@Model.Price ₴</p>
+                <h4>Price:</h4><p>@Model.ProductViewModel.Price ₴</p>
             </div>
             <div class="col-cl-offset-6"> <button class="btn btn-primary">Order this cake</button></div>
             <div class="col-md-8" style="word-break:break-word;">
                 <h3>Description</h3>
                 <div class="">
                     <p>
-                        @Model.Description
-
+                        @Model.ProductViewModel.Description
                     </p>
                 </div>
             </div>
-            @Html.Partial("_Respond", Model)
+            @Html.Partial("_Respond")
+            <footer class="panel-footer col-md-12" style="background-color: #222222;">
+                <div class="col-md-4">
+                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+                </div>
+                <div class="col-md-4" style="color:white;">
+                    <p>
+                        You can simply order this cake just call us or also you
+                        can order your own cake via <a asp-area="" asp-controller="OrderCake" asp-action="OrderCake">online form</a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h4 style="color:white;">Find us</h4>
+                    <span><a href="http://www.facebook.com" target="_blank"><i class="fa fa-facebook" aria-hidden="true" style="font-size:24px;color:blue; margin-right: 15px;"></i></a></span>
+                    <span><a href="https://plus.google.com/discover" target="_blank"><i class="fa fa-google-plus" aria-hidden="true" style="font-size:24px;color:red; margin-right: 15px;"></i></a></span>
+                    <span><a href="https://www.instagram.com" target="_blank"><i class="fa fa-instagram" aria-hidden="true" style="font-size:24px;color:red"></i></a></span>
+                </div>
+            </footer>
         </div>
-        <footer class="panel-footer col-md-12" style="background-color: #222222;">
-            <div class="col-md-4">
-                <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
-            </div>
-            <div class="col-md-4" style="color:white;">
-                <p>
-                    You can simply order this cake just call us or also you
-                    can order your own cake via <a asp-area="" asp-controller="OrderCake" asp-action="OrderCake">online form</a>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <h4 style="color:white;">Find us</h4>
-                <span><a href="http://www.facebook.com" target="_blank"><i class="fa fa-facebook" aria-hidden="true" style="font-size:24px;color:blue; margin-right: 15px;"></i></a></span>
-                <span><a href="https://plus.google.com/discover" target="_blank"><i class="fa fa-google-plus" aria-hidden="true" style="font-size:24px;color:red; margin-right: 15px;"></i></a></span>
-                <span><a href="https://www.instagram.com" target="_blank"><i class="fa fa-instagram" aria-hidden="true" style="font-size:24px;color:red"></i></a></span>
-            </div>
-        </footer>
     </div>
-</div>

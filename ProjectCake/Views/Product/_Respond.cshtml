@@ -1,22 +1,25 @@
-﻿@page
-@model ProjectCake.Models.RespondViewModel
+﻿@using ProjectCake.Models
+@model DetailRespondViewModel
 
 
 
 <div class="col-md-4">
     <form name="respond" method="post">
         <div class="row form-group">
-            <label asp-for="Name" for="Name" class="col-form-label">Your Name</label>
-            <input asp-for="Name" type="text" class="form-control" placeholder="Type Your Name" id="Name" required name="Name" minlength="3">
+            <label asp-for="RespondViewModel.Name" for="Name" class="col-form-label">Your Name</label>
+            <input asp-for="RespondViewModel.Name" type="text" class="form-control" placeholder="Type Your Name" id="Name" required name="Name" minlength="3">
         </div>
         <div class="row form-group">
-            <label asp-for="Email" for="email" class="col-form-label">Email:</label>
-            <input asp-for="Email" class="form-control" type="email" placeholder="example@example.com" id="email" name="Email" required>
+            <label asp-for="RespondViewModel.Email" for="email" class="col-form-label">Email:</label>
+            <input asp-for="RespondViewModel.Email" class="form-control" type="email" placeholder="example@example.com" id="email" name="Email" required>
         </div>
         <div class="form-group">
-            <label asp-for="Text" for="comment">Your comment:</label>
-            <textarea asp-for="Text" class="form-control" rows="5" id="comment"></textarea>
+            <label asp-for="RespondViewModel.Text" for="comment">Your comment:</label>
+            <textarea asp-for="RespondViewModel.Text" class="form-control" rows="5" id="comment"></textarea>
         </div>
         <input type="submit" value="Comment"/>
     </form>
+</div>
+<div class="col-md-12">
+
 </div>

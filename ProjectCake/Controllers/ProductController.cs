@@ -166,8 +166,6 @@ namespace ProjectCake.Controllers
                     model.Date = product.Date;
                     model.CategoryId = product.CategoryId;
                     model.ImageProd = product.ImageProd;
-               
-
                 }
             }
 
@@ -260,15 +258,6 @@ namespace ProjectCake.Controllers
 
         public IActionResult DetailProd(int id)
         {
-            //RespondViewModel model = _context.Set<Respond>().Select(m => new RespondViewModel
-            //{
-            //    Id = m.Id,
-            //    Name = m.Name,
-            //    Email = m.Email,
-            //    Text = m.Text
-            //}).SingleOrDefault(h => h.Id);
-
-
             ProductViewModel product = _context.Set<Product>().Select(p => new ProductViewModel
             {
                 Id = p.Id,
@@ -280,9 +269,21 @@ namespace ProjectCake.Controllers
                 ImageProd = p.ImageProd ?? Consts.DefaultImageProd
             }).SingleOrDefault(c => c.Id == id);
 
-            return View("DetailProd",  product);
-        }
-        
-        
+            RespondViewModel respond = _context.Set<Respond>().Select(m => new RespondViewModel
+            {
+                Id = m.Id,
+                Name = m.Name,
+                Email = m.Email,
+                Text = m.Text
+            }).SingleOrDefault(h => h.Id == id);
+
+            DetailRespondViewModel viewModel = new DetailRespondViewModel()
+            {
+                ProductViewModel = product,
+                RespondViewModel = respond
+            };
+
+            return View("DetailProd",  viewModel);
+        } 
     }
 }
