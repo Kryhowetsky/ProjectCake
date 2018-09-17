@@ -59,7 +59,7 @@
                         <label asp-for="RespondViewModel.Text" for="comment">Your comment:</label>
                         <textarea asp-for="RespondViewModel.Text" class="form-control" rows="5" id="comment"></textarea>
                     </div>
-                    <input type="submit" value="Comment" />
+                    <input type="submit" value="Comment" asp-action="Comment" asp-controller="Product" />
                 </form>
             </div>
 

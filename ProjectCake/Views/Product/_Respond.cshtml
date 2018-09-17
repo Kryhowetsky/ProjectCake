@@ -1,5 +1,5 @@
 ﻿@using ProjectCake.Models
-@model List<DetailRespondViewModel>
+@model List<RespondViewModel>
 
 
 
@@ -9,9 +9,9 @@
         @foreach (var comment in Model)
         {
             <tr>
-                <th>@comment.RespondViewModel.Name</th>
-                <th>@comment.RespondViewModel.AddedDate</th>
-                <th>@comment.RespondViewModel.Text</th>
+                <th>@comment.Name</th>
+                <th>@comment.AddedDate</th>
+                <th>@comment.Text</th>
             </tr>
 
         }

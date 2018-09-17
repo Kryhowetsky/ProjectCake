@@ -253,7 +253,8 @@ namespace ProjectCake.Controllers
             return RedirectToAction("AdminIndex");
         }
 
-        public IActionResult DetailProd(int id)
+        [HttpGet]
+        public IActionResult DetailProd(long? id)
         {
             ProductViewModel product = _context.Set<Product>().Select(p => new ProductViewModel
             {
@@ -286,19 +287,43 @@ namespace ProjectCake.Controllers
         }
 
         [HttpPost]
-        public IActionResult Comment(RespondViewModel respondViewModel)
+        public IActionResult Comment(long? id)
         {
-            var comment = new RespondViewModel
+
+            RespondViewModel model = new RespondViewModel();
+            
+            if (id.HasValue)
             {
-                Id = respondViewModel.Id,
-                Name = respondViewModel.Name,
-                AddedDate = respondViewModel.AddedDate,
-                Email = respondViewModel.Email,
-                Text = respondViewModel.Text
+                Respond respond = _context.Set<Respond>().SingleOrDefault(c => c.Id == id.Value);
+                if(respond != null)
+                {
+                    model.Id = respond.Id;
+                    model.Name = respond.Name;
+                    model.Email = respond.Email;
+                    model.AddedDate = respond.AddedDate;
+                    model.Text = respond.Text;
+                    model.ProductId = respond.ProductId;
+                }
+            }
+
+            
+            DetailRespondViewModel viewModel = new DetailRespondViewModel()
+            {
+                RespondViewModel = model
             };
 
-            _context.Add(respondViewModel);
-            return RedirectToAction("DetailProd");
+            //var comment = new RespondViewModel
+            //{
+            //    //Id = respondViewModel.Id,
+            //    Name = respondViewModel.Name,
+            //    AddedDate = respondViewModel.AddedDate,
+            //    Email = respondViewModel.Email,
+            //    Text = respondViewModel.Text
+            //};
+
+            //_context.Add(comment);
+            //_context.SaveChanges();
+            return View("DetailProd", viewModel);
         }
     }
 }
