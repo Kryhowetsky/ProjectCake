@@ -10,6 +10,6 @@ namespace ProjectCake.Models
     {
         public IEnumerable<Product> Products { get; set; }
         public RespondViewModel RespondViewModel { get; set; }
-        public ProductViewModel ProductViewModel { get; internal set; }
+        public ProductViewModel ProductViewModel { get; set; }
     }
 }
