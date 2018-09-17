@@ -270,8 +270,10 @@ namespace ProjectCake.Controllers
             {
                 Id = m.Id,
                 Name = m.Name,
+                AddedDate = m.AddedDate,
                 Email = m.Email,
-                Text = m.Text
+                Text = m.Text,
+                ProductId = m.ProductId
             }).SingleOrDefault(h => h.Id == id);
 
             DetailRespondViewModel viewModel = new DetailRespondViewModel()
