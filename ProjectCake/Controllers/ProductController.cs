@@ -16,15 +16,15 @@ namespace ProjectCake.Controllers
 
     public class ProductController : Controller
     {
-        
+
         private ApplicationDbContext _context;
 
-        
+
         public ProductController(ApplicationDbContext context)
         {
             _context = context;
         }
-        
+
         public async Task<IActionResult> Index(int? category, string name, int page = 1, SortState sortOrder = SortState.NameAsc)
         {
 
@@ -80,7 +80,7 @@ namespace ProjectCake.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> AdminIndex(int? category, string name, int page=1, SortState sortOrder = SortState.NameAsc)
+        public async Task<IActionResult> AdminIndex(int? category, string name, int page = 1, SortState sortOrder = SortState.NameAsc)
         {
             //IEnumerable<ProductViewModel> model = _context.Set<Product>().ToList().Select(p => new ProductViewModel
             //{
@@ -108,7 +108,7 @@ namespace ProjectCake.Controllers
                 products = products.Where(p => p.Name.Contains(name));
             }
 
-            //Sort
+            //Sorting
             switch (sortOrder)
             {
                 case SortState.NameDesc:
@@ -166,8 +166,6 @@ namespace ProjectCake.Controllers
                     model.Date = product.Date;
                     model.CategoryId = product.CategoryId;
                     model.ImageProd = product.ImageProd;
-               
-
                 }
             }
 
@@ -201,9 +199,6 @@ namespace ProjectCake.Controllers
                     product.Date = DateTime.Now;
                     product.ModifiedDate = DateTime.Now;
                     product.CategoryId = model.CategoryId;
-
-
-
 
                     if (isNew)
                     {
@@ -260,15 +255,6 @@ namespace ProjectCake.Controllers
 
         public IActionResult DetailProd(int id)
         {
-            //RespondViewModel model = _context.Set<Respond>().Select(m => new RespondViewModel
-            //{
-            //    Id = m.Id,
-            //    Name = m.Name,
-            //    Email = m.Email,
-            //    Text = m.Text
-            //}).SingleOrDefault(h => h.Id);
-
-
             ProductViewModel product = _context.Set<Product>().Select(p => new ProductViewModel
             {
                 Id = p.Id,
@@ -280,9 +266,37 @@ namespace ProjectCake.Controllers
                 ImageProd = p.ImageProd ?? Consts.DefaultImageProd
             }).SingleOrDefault(c => c.Id == id);
 
-            return View("DetailProd",  product);
+            RespondViewModel respond = _context.Set<Respond>().Select(m => new RespondViewModel
+            {
+                Id = m.Id,
+                Name = m.Name,
+                Email = m.Email,
+                Text = m.Text
+            }).SingleOrDefault(h => h.Id == id);
+
+            DetailRespondViewModel viewModel = new DetailRespondViewModel()
+            {
+                ProductViewModel = product,
+                RespondViewModel = respond
+            };
+
+            return View("DetailProd", viewModel);
         }
-        
-        
+
+        [HttpPost]
+        public IActionResult Comment(RespondViewModel respondViewModel)
+        {
+            var comment = new RespondViewModel
+            {
+                Id = respondViewModel.Id,
+                Name = respondViewModel.Name,
+                AddedDate = respondViewModel.AddedDate,
+                Email = respondViewModel.Email,
+                Text = respondViewModel.Text
+            };
+
+            _context.Add(respondViewModel);
+            return RedirectToAction("DetailProd");
+        }
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjectCake.Models
 {
-    public class IndexDetailProdRespondViewModel
+    public class DetailRespondViewModel
     {
-        public IEnumerable<Product> Products { get; set; }
-        public RespondViewModel RespondViewModel { get; set; }
         public ProductViewModel ProductViewModel { get; set; }
+        public RespondViewModel RespondViewModel { get; set; }
     }
 }
