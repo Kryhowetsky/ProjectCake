@@ -1,19 +1,19 @@
 ﻿@using ProjectCake.Models
 @model List<RespondViewModel>
 
-
-
-
 <div class="col-md-12">
     <table>
         @foreach (var comment in Model)
         {
-            <tr>
+            <!-- <tr>
                 <th>@comment.Name</th>
                 <th>@comment.AddedDate</th>
                 <th>@comment.Text</th>
-            </tr>
-
+            </tr> -->
+            <div>@comment.AddedDate </div>
+            <div><strong>@comment.Name</strong></div>
+            <div>@comment.Text </div>
+            <hr>
         }
     </table>
 </div>

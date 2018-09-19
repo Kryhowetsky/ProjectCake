@@ -267,63 +267,33 @@ namespace ProjectCake.Controllers
                 ImageProd = p.ImageProd ?? Consts.DefaultImageProd
             }).SingleOrDefault(c => c.Id == id);
 
-            RespondViewModel respond = _context.Set<Respond>().Select(m => new RespondViewModel
-            {
-                Id = m.Id,
-                Name = m.Name,
-                AddedDate = m.AddedDate,
-                Email = m.Email,
-                Text = m.Text,
-                ProductId = m.ProductId
-            }).SingleOrDefault(h => h.Id == id);
+            var responses = GetAllResponces(product.Id);
+            var createResponceViewModel = new RespondViewModel { ProductId = product.Id };
 
             DetailRespondViewModel viewModel = new DetailRespondViewModel()
             {
                 ProductViewModel = product,
-                RespondViewModel = respond
+                Responses = responses,
+                CreateRespondViewModel = createResponceViewModel
             };
 
             return View("DetailProd", viewModel);
         }
 
-        [HttpPost]
-        public IActionResult Comment(long? id)
+        private List<RespondViewModel> GetAllResponces(int productId)
         {
+            var viewList = _context.Respond
+                    .Where(respond => respond.ProductId == productId)
+                    .Select(respond => new RespondViewModel
+                    {
+                        Text = respond.Text,
+                        Name = respond.Name,
+                        AddedDate = respond.AddedDate,
+                    })
+                    .ToList();
 
-            RespondViewModel model = new RespondViewModel();
-            
-            if (id.HasValue)
-            {
-                Respond respond = _context.Set<Respond>().SingleOrDefault(c => c.Id == id.Value);
-                if(respond != null)
-                {
-                    model.Id = respond.Id;
-                    model.Name = respond.Name;
-                    model.Email = respond.Email;
-                    model.AddedDate = respond.AddedDate;
-                    model.Text = respond.Text;
-                    model.ProductId = respond.ProductId;
-                }
-            }
-
-            
-            DetailRespondViewModel viewModel = new DetailRespondViewModel()
-            {
-                RespondViewModel = model
-            };
-
-            //var comment = new RespondViewModel
-            //{
-            //    //Id = respondViewModel.Id,
-            //    Name = respondViewModel.Name,
-            //    AddedDate = respondViewModel.AddedDate,
-            //    Email = respondViewModel.Email,
-            //    Text = respondViewModel.Text
-            //};
-
-            //_context.Add(comment);
-            //_context.SaveChanges();
-            return View("DetailProd", viewModel);
+            return viewList;
         }
+
     }
 }

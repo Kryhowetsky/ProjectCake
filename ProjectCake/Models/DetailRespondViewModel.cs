@@ -9,6 +9,7 @@ namespace ProjectCake.Models
     public class DetailRespondViewModel
     {
         public ProductViewModel ProductViewModel { get; set; }
-        public RespondViewModel RespondViewModel { get; set; }
+        public RespondViewModel CreateRespondViewModel { get; set; }
+        public List<RespondViewModel> Responses { get; set; }
     }
 }

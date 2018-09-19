@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -44,13 +45,14 @@ namespace ProjectCake.Controllers
                 Name = viewModel.Name,
                 Text = viewModel.Text,
                 Email = viewModel.Email,
-                ProductId = viewModel.ProductId
+                ProductId = viewModel.ProductId,
+                AddedDate = DateTime.Now
             };
-            
+
             _context.Add(respond);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Product","DetailProd",new { id = viewModel.ProductId});
+            return RedirectToAction("DetailProd", "Product", new { id = viewModel.ProductId });
         }
 
     }
