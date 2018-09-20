@@ -64,8 +64,6 @@ namespace ProjectCake
                 {
                     orderCakeViewModel.File.CopyTo(stream);
                 }
-                
-
             }
 
             var orderCare = new OrderCake
@@ -91,7 +89,7 @@ namespace ProjectCake
 
                     message.To.Add("latvolpe@gmail.com");//Where mail will be sent
 
-                    message.Body = "Name: " + orderCakeViewModel.Name + orderCakeViewModel.Surname + "\nFrom: " + orderCakeViewModel.Email + "\nPhone: " + orderCakeViewModel.Phone + "\nDate for prepared: " + orderCakeViewModel.PreparedOrderDate + "\n" + orderCakeViewModel.Comment + "\nMessage: " + orderCakeViewModel.File;
+                    message.Body = "Name: " + orderCakeViewModel.Name + orderCakeViewModel.Surname + "\nFrom: " + orderCakeViewModel.Email + "\nPhone: " + orderCakeViewModel.Phone + "\nDate for prepared: " + orderCakeViewModel.PreparedOrderDate + "\nMessage: " + orderCakeViewModel.Comment + "\n" + orderCakeViewModel.File;
 
                     SmtpClient smtp = new SmtpClient();
 
@@ -117,8 +115,6 @@ namespace ProjectCake
             }
 
             return RedirectToAction("Index");
-        }
-
-        
+        }  
     }
 }

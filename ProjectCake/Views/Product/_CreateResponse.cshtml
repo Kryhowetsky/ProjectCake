@@ -1,20 +1,20 @@
 @model RespondViewModel
 
- <div class="col-md-4">
+ <div class="col-md-2" style="width:25%;">
     <form method="post" asp-action="Create" asp-controller="Responses">
         <div class="row form-group">
-            <label asp-for="@Model.Name" for="Name" class="col-form-label">Your Name</label>
+            <label asp-for="@Model.Name" for="Name" class="col-form-label">Your Name:</label>
             <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Type Your Name" id="Name" required name="Name" minlength="3">
         </div>
         <div class="row form-group">
             <label asp-for="@Model.Email" for="email" class="col-form-label">Email:</label>
             <input asp-for="@Model.Email" class="form-control" type="email" placeholder="example@example.com" id="email" name="Email" required>
         </div>
-        <div class="form-group">
+        <div class=" row form-group">
             <label asp-for="@Model.Text" for="comment">Your comment:</label>
             <textarea asp-for="@Model.Text" class="form-control" rows="5" id="comment" name="Text"></textarea>
         </div>
         <input type="hidden" name="ProductId" value="@Model.ProductId" />
-        <input type="submit" value="Comment"  />
+        <input type="submit" value="Send Comment"  class="btn btn-primary"/>
     </form>
 </div>

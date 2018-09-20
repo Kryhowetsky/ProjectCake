@@ -221,8 +221,6 @@ namespace ProjectCake.Controllers
                             product.ImageProd = pathForClient;
                             _context.SaveChanges();
                         }
-
-
                     }
                 }
             }

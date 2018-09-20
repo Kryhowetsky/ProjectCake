@@ -2,6 +2,7 @@
 @model List<RespondViewModel>
 
 <div class="col-md-12">
+    <h3>Comments:</h3>
     <table>
         @foreach (var comment in Model)
         {
@@ -10,8 +11,8 @@
                 <th>@comment.AddedDate</th>
                 <th>@comment.Text</th>
             </tr> -->
-            <div>@comment.AddedDate </div>
-            <div><strong>@comment.Name</strong></div>
+            <div>Date: @comment.AddedDate.ToString("d 'of' MMMM  yyyy (hh:mm tt)")</div>
+            <div>Name: <strong>@comment.Name</strong></div>
             <div>@comment.Text </div>
             <hr>
         }

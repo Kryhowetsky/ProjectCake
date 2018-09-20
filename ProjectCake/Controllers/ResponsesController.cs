@@ -23,20 +23,20 @@ namespace ProjectCake.Controllers
             return Json(list);
         }
 
-        public async Task<IActionResult> TestCreate()
-        {
-            var respond = new Respond
-            {
-                Name = "1",
-                Text = "2",
-                Email = "dd@d.d",
-                ProductId = 1
-            };
-            var addedRespond = _context.Add(respond);
-            await _context.SaveChangesAsync();
+        //public async Task<IActionResult> TestCreate()
+        //{
+        //    var respond = new Respond
+        //    {
+        //        Name = "1",
+        //        Text = "2",
+        //        Email = "dd@d.d",
+        //        ProductId = 2
+        //    };
+        //    var addedRespond = _context.Add(respond);
+        //    await _context.SaveChangesAsync();
 
-            return Json(addedRespond);
-        }
+        //    return Json(addedRespond);
+        //}
 
         public async Task<IActionResult> Create(RespondViewModel viewModel)
         {
