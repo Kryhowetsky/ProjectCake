@@ -1,14 +1,16 @@
-﻿@model IndexSortViewModel
-@using ProjectCake.Models
+﻿@*@model IndexSortViewModel
+    @using ProjectCake.Models*@
 @using ProjectCake.Code
+
 
 @section Styles{
     <link rel="stylesheet" type="text/css" href="~/css/StyleAdminIndex.css" />
 }
 
+
+
 <div class="top-buffer"></div>
 <h1>Admin panel</h1>
-
 <div class="panel panel-primary" id="panel">
     <div class="panel-heading panel-head">Cakes List</div>
     <div class="panel-body">
@@ -17,22 +19,7 @@
                 <i class="glyphicon glyphicon-plus"></i>  Add Product
             </a>
         </div>
-
-        <div class="col-md-offset-3" id="filter">
-            <form method="get">
-                <div class="form-inline">
-                    <label class="control-label">Name:</label>
-                    @Html.TextBox("name", Model.FilterViewModel.SelectedName, htmlAttributes: new { @class = "form-control" })
-
-                    <label class="control-label">Category: </label>
-                    @Html.DropDownList("category", Model.FilterViewModel.Categories as SelectList,
-                            htmlAttributes: new { @class = "form-control" })
-
-                    <input type="submit" value="Filter" class="btn btn-default" id="btn-filter" />
-                </div>
-            </form>
-        </div>
-
+        @Html.Partial("_Filter")
         <table class="table table-bordered table-striped table-condensed" id="tbl">
             <thead>
                 <tr>
@@ -71,7 +58,6 @@
                             <img src="@u.ImageProd" alt="Image" />
                         </td>
                         <td>
-
                             <a id="editProductModal" data-toggle="modal" asp-action="AddEditProduct" asp-route-id="@u.Id" data-target="#modal-action-product"
                                class="btn btn-info">
                                 <i class="glyphicon glyphicon-pencil"></i> Edit
@@ -117,3 +103,22 @@
     {
     <script src="~/js/product-index.js" asp-append-version="true"></script>
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

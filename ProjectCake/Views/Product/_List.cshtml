@@ -1,12 +1,20 @@
 ﻿@model IEnumerable<ProjectCake.Data.Product>
 
-@section Styles{
-    <style type="text/css">
-        img {
-            background-image: url('../../wwwroot/images/chocolate.jpg')
-        }
-    </style>
-}
+
+
+
+
+@*@section Styles{
+        <style type="text/css">
+            img {
+                background-image: url('../../wwwroot/images/chocolate.jpg')
+            }
+        </style>
+    }*@
+
+
+
+
 
 @foreach (var item in Model)
 {
@@ -22,6 +30,7 @@
                 <div style="overflow:hidden; height:180px;">
                     <p>@item.Description</p>
                 </div>
+
             </div>
             <div class="ratings">
                 <p class="pull-right">15 reviews</p>
@@ -36,3 +45,4 @@
         </div>
     </div>
 }
+

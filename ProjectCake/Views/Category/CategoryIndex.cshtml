@@ -6,9 +6,9 @@
 @using ProjectCake.Models
 @using ProjectCake.Code
 
-<div class="top-buffer"></div>
-<div class="panel panel-primary">
-    <div class="panel-heading panel-head">Categories</div>
+
+<div class="panel panel-primary center-block" style="width:60%; align-self:center;">
+    <div class="panel-heading panel-head"><h3 style="text-align:center;">Categories</h3></div>
     <div class="panel-body">
         <div class="top-buffer"></div>
 
@@ -19,18 +19,18 @@
                 <input type="text" class="form-control" id="categoryname" />
             </div>*@
 
-        <div class="top-buffer"></div>
+        
         <div class="btn-group">
             <a id="createEditBookModal" data-toggle="modal" asp-action="AddEditCategory" data-target="#modal-action-category" class="btn btn-primary">
                 <i class="glyphicon glyphicon-plus"></i>  Add Category
             </a>
         </div>
-        <div class="top-buffer"></div>
-        <table class="table table-bordered table-striped table-condensed">
+        
+        <table class="table table-bordered table-striped table-condensed" style="margin-top:20px;" align="center">
             <thead>
                 <tr>
-
                     <th>Name</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@
 
                         <td>@Html.DisplayFor(modelItem => item.Name)</td>
 
-                        <td>
+                        <td align="center" style="width:60%;">
                             <a id="editCategoryModal" data-toggle="modal" asp-action="AddEditCategory" asp-route-id="@item.Id" data-target="#modal-action-category"
                                class="btn btn-info">
                                 <i class="glyphicon glyphicon-pencil"></i>  Edit

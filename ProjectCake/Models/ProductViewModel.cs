@@ -19,5 +19,11 @@ namespace ProjectCake.Models
         public string CategoryName { get; set; }
         public Category Category { get; set; }
         public ICollection<CategoryViewModel> Categories { get; set; }
+
+        public List<Respond> Respond { get; set; }
+        public ProductViewModel()
+        {
+            Respond = new List<Respond>();
+        }
     }
 }

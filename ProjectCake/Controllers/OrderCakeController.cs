@@ -1,17 +1,16 @@
-﻿using System;
-using System.IO;
-using System.Net.Mail;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using ProjectCake.Data;
 using ProjectCake.Models;
 using ProjectCake.Repository;
-using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Hosting;
-
-
+using System.IO;
+using System.Net.Mail;
 
 namespace ProjectCake
 {
+    
     public class OrderCakeController : Controller
     {
         private readonly IHostingEnvironment hostingEnvironment;
@@ -90,7 +89,7 @@ namespace ProjectCake
 
                     message.To.Add("latvolpe@gmail.com");//Where mail will be sent
 
-                    message.Body = "Name: " + orderCakeViewModel.Name + orderCakeViewModel.Surname + "\nFrom: " + orderCakeViewModel.Email + "\nPhone: " + orderCakeViewModel.Phone + "\nDate for prepared: " + orderCakeViewModel.PreparedOrderDate + "\n" + orderCakeViewModel.Comment + "\nMessage: " + orderCakeViewModel.File;
+                    message.Body = "Name: " + orderCakeViewModel.Name + orderCakeViewModel.Surname + "\nFrom: " + orderCakeViewModel.Email + "\nPhone: " + orderCakeViewModel.Phone + "\nDate for prepared: " + orderCakeViewModel.PreparedOrderDate + "\nMessage: " + orderCakeViewModel.Comment + "\n" + orderCakeViewModel.File;
 
                     SmtpClient smtp = new SmtpClient();
 
@@ -116,6 +115,6 @@ namespace ProjectCake
             }
 
             return RedirectToAction("Index");
-        }
+        }  
     }
 }

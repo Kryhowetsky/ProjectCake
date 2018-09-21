@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System;
+using System.Collections.Generic;
 
 namespace ProjectCake.Data
 {
@@ -13,5 +15,11 @@ namespace ProjectCake.Data
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
+
+        public List<Respond> Respond { get; set; }
+        public Product()
+        {
+            Respond = new List<Respond>();
+        }
     }
 }

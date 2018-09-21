@@ -1,32 +1,81 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProjectCake.Const;
+using ProjectCake.Data;
+using ProjectCake.Models;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using ProjectCake.Data;
-using ProjectCake.Const;
-using ProjectCake.Models;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
-
-
 
 namespace ProjectCake.Controllers
 {
+
     public class ProductController : Controller
     {
+
         private ApplicationDbContext _context;
+
 
         public ProductController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? category, string name, int page = 1, SortState sortOrder = SortState.NameAsc)
         {
-            return View();
+
+            int pageSize = 6;
+
+            IQueryable<Product> products = _context.Product.Include(x => x.Category);
+            if (category != null && category != 0)
+            {
+                products = products.Where(p => p.CategoryId == category);
+            }
+            if (!String.IsNullOrEmpty(name))
+            {
+                products = products.Where(p => p.Name.Contains(name));
+            }
+
+
+            switch (sortOrder)
+            {
+                case SortState.NameDesc:
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+                case SortState.PriceAsc:
+                    products = products.OrderBy(s => s.Price);
+                    break;
+                case SortState.PriceDesc:
+                    products = products.OrderByDescending(s => s.Price);
+                    break;
+                case SortState.CategoryAsc:
+                    products = products.OrderBy(s => s.Category.Name);
+                    break;
+                case SortState.CategoryDesc:
+                    products = products.OrderByDescending(s => s.Category.Name);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Name);
+                    break;
+
+            }
+
+            var count = await products.CountAsync();
+            var items = await products.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+
+            IndexSortViewModel viewModel = new IndexSortViewModel
+            {
+                PageViewModel = new PageViewModel(count, page, pageSize),
+                SortViewModel = new SortViewModel(sortOrder),
+                FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name),
+                Products = items
+            };
+            return View(viewModel);
         }
 
         [Authorize(Roles = "Admin")]
@@ -59,32 +108,28 @@ namespace ProjectCake.Controllers
                 products = products.Where(p => p.Name.Contains(name));
             }
 
-            //Sort
+            //Sorting
             switch (sortOrder)
             {
                 case SortState.NameDesc:
                     products = products.OrderByDescending(s => s.Name);
                     break;
-
                 case SortState.PriceAsc:
                     products = products.OrderBy(s => s.Price);
                     break;
-
                 case SortState.PriceDesc:
                     products = products.OrderByDescending(s => s.Price);
                     break;
-
                 case SortState.CategoryAsc:
                     products = products.OrderBy(s => s.Category.Name);
                     break;
-
                 case SortState.CategoryDesc:
                     products = products.OrderByDescending(s => s.Category.Name);
                     break;
-
                 default:
                     products = products.OrderBy(s => s.Name);
                     break;
+
             }
 
             //Paging
@@ -98,6 +143,7 @@ namespace ProjectCake.Controllers
                 FilterViewModel = new FilterViewModel(_context.Category.ToList(), category, name),
                 Products = items
             };
+
 
             return View(viewModel);
         }
@@ -205,7 +251,8 @@ namespace ProjectCake.Controllers
             return RedirectToAction("AdminIndex");
         }
 
-        public IActionResult DetailProd(int id)
+        [HttpGet]
+        public IActionResult DetailProd(long? id)
         {
             ProductViewModel product = _context.Set<Product>().Select(p => new ProductViewModel
             {
@@ -218,39 +265,33 @@ namespace ProjectCake.Controllers
                 ImageProd = p.ImageProd ?? Consts.DefaultImageProd
             }).SingleOrDefault(c => c.Id == id);
 
-            return View("DetailProd", product);
+            var responses = GetAllResponces(product.Id);
+            var createResponceViewModel = new RespondViewModel { ProductId = product.Id };
+
+            DetailRespondViewModel viewModel = new DetailRespondViewModel()
+            {
+                ProductViewModel = product,
+                Responses = responses,
+                CreateRespondViewModel = createResponceViewModel
+            };
+
+            return View("DetailProd", viewModel);
         }
 
-        //Paginations
-
-        public JsonResult Pagination(int page)
+        private List<RespondViewModel> GetAllResponces(int productId)
         {
-            var products = GetProducts(page);
+            var viewList = _context.Respond
+                    .Where(respond => respond.ProductId == productId)
+                    .Select(respond => new RespondViewModel
+                    {
+                        Text = respond.Text,
+                        Name = respond.Name,
+                        AddedDate = respond.AddedDate,
+                    })
+                    .ToList();
 
-            return Json(products);
+            return viewList;
         }
 
-        public PartialViewResult List(int page)
-        {
-            var products = GetProducts(page);
-
-            return PartialView("_List", products);
-        }
-
-        private bool ProductExist(int id)
-        {
-            return _context.Product.Any(p => p.Id == id);
-        }
-
-        private List<Product> GetProducts(int page)
-        {
-            var skipCount = page * Consts.ProductPaginationCount;
-
-            var products = _context.Product.Skip(skipCount)
-                                   .Take(Consts.ProductPaginationCount)
-                                   .ToList();
-
-            return products;
-        }
     }
 }

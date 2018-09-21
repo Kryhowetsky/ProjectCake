@@ -1,0 +1,20 @@
+﻿@using ProjectCake.Models
+@model List<RespondViewModel>
+
+<div class="col-md-12">
+    <h3>Comments:</h3>
+    <table>
+        @foreach (var comment in Model)
+        {
+            <!-- <tr>
+                <th>@comment.Name</th>
+                <th>@comment.AddedDate</th>
+                <th>@comment.Text</th>
+            </tr> -->
+            <div>Date: @comment.AddedDate.ToString("d 'of' MMMM  yyyy (hh:mm tt)")</div>
+            <div>Name: <strong>@comment.Name</strong></div>
+            <div>@comment.Text </div>
+            <hr>
+        }
+    </table>
+</div>

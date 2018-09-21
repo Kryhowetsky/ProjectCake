@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectCake.Data;
 
 namespace ProjectCake.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180906111811_Respond")]
+    partial class Respond
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,21 +198,19 @@ namespace ProjectCake.Data.Migrations
 
                     b.Property<DateTime>("AddedDate");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<string>("Name");
-
-                    b.Property<int>("ProductId");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Respond");
+                    b.ToTable("Responds");
                 });
 
             modelBuilder.Entity("ProjectCake.Models.ApplicationUser", b =>
@@ -340,14 +340,6 @@ namespace ProjectCake.Data.Migrations
                     b.HasOne("ProjectCake.Data.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ProjectCake.Data.Respond", b =>
-                {
-                    b.HasOne("ProjectCake.Data.Product", "Product")
-                        .WithMany("Respond")
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
