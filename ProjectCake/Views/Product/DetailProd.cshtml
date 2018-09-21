@@ -25,7 +25,7 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="col-md-offset-4">
-                    <img src="@Model.ProductViewModel.ImageProd" style="width:300px; height: 210px;" />
+                    <img src="@Model.ProductViewModel.ImageProd" style="width:300px; height: 210px;" class="img-responsive" />
                 </div>
             </div>
             <div class="col-md-offset-3">
@@ -45,14 +45,14 @@
                 </div>
             </div>
 
-            <section class="col-xs-12">
+            <div class="col-md-12">
                 <h3>Add your comment</h3>
                 @Html.Partial("_CreateResponse", @Model.CreateRespondViewModel)
                 @Html.Partial("_Respond", @Model.Responses)
 
-            </section>
+            </div>
             
-            <footer class="panel-footer col-md-12" style="background-color: #222222;">
+            <footer class="panel-footer navbar-bottom col-md-12" style="background-color: #222222; position:sticky;">
                 <div class="col-md-4">
                     <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
                 </div>
