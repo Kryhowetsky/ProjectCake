@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjectCake.Data;
 using ProjectCake.Models;
 using ProjectCake.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace ProjectCake
 {
@@ -16,36 +19,75 @@ namespace ProjectCake
         private readonly IHostingEnvironment hostingEnvironment;
 
         private OrderCakeRepository _orderCakeRepository;
+        private ApplicationDbContext _context;
 
         public OrderCakeController(ApplicationDbContext context, IHostingEnvironment hosting)
         {
             _orderCakeRepository = new OrderCakeRepository(context);
             hostingEnvironment = hosting;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(SortStateOrderList sortOrderList = SortStateOrderList.NameAsc)
         {
-            var orderCakes = _orderCakeRepository.GetAll();
+            //var orderCakes = _orderCakeRepository.GetAll();
 
-            var orderCakeViewModels = new List<OrderCakeViewModel>();
-            foreach (var orderCake in orderCakes)
+            //var orderCakeViewModels = new List<OrderCakeViewModel>();
+            //foreach (var orderCake in orderCakes)
+            //{
+            //    var orderCakeViewModel = new OrderCakeViewModel
+            //    {
+            //        Id = orderCake.Id,
+            //        Name = orderCake.Name,
+            //        Surname = orderCake.Surname,
+            //        Phone = orderCake.Phone,
+            //        Email = orderCake.Email,
+            //        PreparedOrderDate = orderCake.PreparedOrderDate,
+            //        Comment = orderCake.Comment,
+            //        Date = orderCake.Date
+            //    };
+
+            //    orderCakeViewModels.Add(orderCakeViewModel);
+            //}
+
+            IQueryable<OrderCake> orderCakeList = _context.OrderCake.Include(x => x.Id);
+
+            switch (sortOrderList)
             {
-                var orderCakeViewModel = new OrderCakeViewModel
-                {
-                    Id = orderCake.Id,
-                    Name = orderCake.Name,
-                    Surname = orderCake.Surname,
-                    Phone = orderCake.Phone,
-                    Email = orderCake.Email,
-                    PreparedOrderDate = orderCake.PreparedOrderDate,
-                    Comment = orderCake.Comment,
-                    Date = orderCake.Date
-                };
+                case SortStateOrderList.NameDesc:
+                    orderCakeList = orderCakeList.OrderByDescending(s => s.Name);
+                    break;
+                case SortStateOrderList.DateAsc:
+                    orderCakeList = orderCakeList.OrderBy(s => s.Date);
+                    break;
+                case SortStateOrderList.DateDesc:
+                    orderCakeList = orderCakeList.OrderByDescending(s => s.Date);
+                    break;
+                case SortStateOrderList.PreparedOrderDateAsc:
+                    orderCakeList = orderCakeList.OrderBy(s => s.PreparedOrderDate);
+                    break;
+                case SortStateOrderList.PreparedOrderDateDesc:
+                    orderCakeList = orderCakeList.OrderByDescending(s => s.PreparedOrderDate);
+                    break;
+                case SortStateOrderList.SurnameAsc:
+                    orderCakeList = orderCakeList.OrderBy(s => s.Surname);
+                    break;
+                case SortStateOrderList.SurnameDesc:
+                    orderCakeList = orderCakeList.OrderByDescending(s => s.Surname);
+                    break;
+                default:
+                    orderCakeList = orderCakeList.OrderBy(s => s.Name);
+                    break;
 
-                orderCakeViewModels.Add(orderCakeViewModel);
             }
 
-            return View("OrderList", orderCakeViewModels);
+            IndexSortOrderListViewModel listViewModel = new IndexSortOrderListViewModel
+            {
+                OrderCake = new OrderCake(),
+                SortOrderListViewModel = new SortOrderListViewModel(sortOrderList)
+            };
+
+            return View("OrderList", listViewModel);
         }
 
         [HttpGet]

@@ -12,6 +12,7 @@ namespace ProjectCake.Models
         public PageViewModel  PageViewModel { get; set; }
         public FilterViewModel FilterViewModel { get; set; }
         public SortViewModel SortViewModel { get; set; }
+        
 
     }
 }
